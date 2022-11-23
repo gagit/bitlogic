@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nueva Vtmclh{% endblock %}
+
+{% block body %}
+
+<h5 class="card-header bg-secondary text-light" ><i class="fa fa-plus"></i>
+    Nueva Vtmclh </h5>
+<hr/>
+    {{ include('vtmclh/_form.html.twig') }}
+<hr/>
+<ul>
+    <li style="display: inline-flex">
+        <a href="{{ path('app_vtmclh_index') }}" class="btn btn-outline-info btn-back" data-toggle="tooltip" data-placement="top"
+           title="Volver"
+        ><i class="fa fa-arrow-left"></i></a>
+    </li>
+</ul>
+
+{% endblock %}

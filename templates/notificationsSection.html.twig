@@ -1,0 +1,37 @@
+<div class="container" id="notifications">
+{#    {% for type, message in app.flashes('notification') %}#}
+{#        <div class="alert alert-success alert-dismissible fade show" role="alert">#}
+{#            <i class="fa fa-remove"> </i>#}
+{#            {{ type }} {{ message }}#}
+{#            <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
+{#                <span aria-hidden="true">X</span></button>#}
+{#        </div>#}
+{#    {% endfor %}#}
+    {% for type, messages in app.session.flashBag.all %}
+        {% for message in messages %}
+            {% if type == 'error' %}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <i class="fa fa-remove"> </i>
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">X</span></button>
+                </div>
+            {% elseif type == 'notice' %}
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <i class="fa fa-check"></i>
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">X</span></button>
+                </div>
+            {% elseif type == 'warning' %}
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <i class="fa fa-exclamation"></i>
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">X</span></button>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+    {% endfor %}
+</div>

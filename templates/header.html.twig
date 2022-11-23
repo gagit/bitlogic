@@ -1,0 +1,58 @@
+<section id="header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark" id="menu">
+            <!--Logo de la empresa-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#contentNavbarTop"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="contentNavbarTop">
+                {% if is_granted('ROLE_ADMIN') %}
+                    {% include 'menu/admin.html.twig' %}
+                {% elseif is_granted('ROLE_ADMIN_BARRIO') %}
+                    {% include 'menu/admin_barrio.html.twig' %}
+                {% elseif is_granted('ROLE_PROFESIONAL') %}
+                    {% include 'menu/profesional.html.twig' %}
+                {% elseif is_granted('ROLE_PROPIETARIO') %}
+                    {% include 'menu/propietario.html.twig' %}
+                {% endif %}
+
+        <!--Menu de usuario -->
+        {% if app.user %}
+            <ul class="navbar-nav  navbar-right ml-auto  ">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#"
+                       id="userConfiguration" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="">
+                        <ul class="list-group-item">
+                            <li class="list-group-item list-group-item-action" >
+                                {{ app.user.nombre }}, {{ app.user.apellido }}
+                            </li>
+                            <li class="list-group-item list-group-item-action" >
+                                <i class="fa fa-at"></i> {{ app.user.email }}
+                            </li>
+                            <li class="list-group-item list-group-item-action" >
+                                <i class="fa fa-mobile"></i> {{ app.user.cellphone }}
+                            </li>
+                        </ul>
+                        <a class="dropdown-item" href="{{ path('app_logout')}}"
+                           title="{{'controller.titles.logout'| trans({}, 'controller_messages') }}">
+                            <i class="fa fa-power-off"></i>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        {% endif %}
+        </div>
+        {% if app.user %}
+            <a class="navbar-brand " href="{{ path('app_logout')}}"
+               title="{{'controller.titles.logout'| trans({}, 'controller_messages') }}">
+                <i class="fa fa-power-off"></i>
+            </a>
+        {% endif %}
+    </nav>
+    <br/>
+</section>
