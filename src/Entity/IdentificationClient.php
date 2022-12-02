@@ -33,9 +33,9 @@ class IdentificationClient implements IdentificationInterface
     private $identification;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Propietary::class, inversedBy="identification")
+     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="identification")
      */
-    private $propietary;
+    private $client;
 
     public function getId(): ?string
     {
@@ -61,14 +61,14 @@ class IdentificationClient implements IdentificationInterface
         return $this;
     }
 
-    public function getPropietary(): PersonInterface
+    public function getClient(): PersonInterface
     {
-        return $this->propietary;
+        return $this->client;
     }
 
-    public function setPropietary(?PersonInterface $propietary): IdentificationInterface
+    public function setClient(?PersonInterface $client): IdentificationInterface
     {
-        $this->propietary = $propietary;
+        $this->client = $client;
 
         return $this;
     }
@@ -80,12 +80,12 @@ class IdentificationClient implements IdentificationInterface
 
     public function getPerson(): PersonInterface
     {
-        return $this->getPropietary();
+        return $this->getClient();
     }
 
     public function setPerson(PersonInterface $person): IdentificationInterface
     {
-        $this->setPropietary($person);
+        $this->setClient($person);
 
         return $this;
     }
