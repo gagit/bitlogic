@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nueva ContactClient{% endblock %}
+
+{% block body %}
+
+<h5 class="card-header bg-secondary text-light" ><i class="fa fa-plus"></i>
+    Nueva ContactClient </h5>
+<hr/>
+    {{ include('contact_client/_form.html.twig') }}
+<hr/>
+<ul>
+    <li style="display: inline-flex">
+        <a href="{{ path('app_contact_client_index') }}" class="btn btn-outline-info btn-back" data-toggle="tooltip" data-placement="top"
+           title="Volver"
+        ><i class="fa fa-arrow-left"></i></a>
+    </li>
+</ul>
+
+{% endblock %}

@@ -4,12 +4,12 @@ namespace App\Entity;
 
 use App\Model\IdentificationInterface;
 use App\Model\PersonInterface;
-use App\Repository\IdentificationPropietaryRepository;
+use App\Repository\IdentificationClientRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 /**
- * @ORM\Entity(repositoryClass=IdentificationPropietaryRepository::class)
+ * @ORM\Entity(repositoryClass=IdentificationClientRepository::class)
  */
 class IdentificationClient implements IdentificationInterface
 {

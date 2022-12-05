@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Tipo de Contacto{% endblock %}
+
+{% block body %}
+
+<h5 class="card-header bg-secondary text-light" ><i class="fa fa-edit"></i>
+    Editar Tipo de Contacto </h5>
+<hr/>
+    {{ include('contact_type/_form.html.twig') }}
+
+<hr/>
+<ul>
+    <li style="display: inline-flex">
+        <a href="{{ path('app_contact_type_index') }}" class="btn btn-outline-info btn-back" data-toggle="tooltip" data-placement="top"
+           title="Volver"
+        ><i class="fa fa-arrow-left"></i></a>
+    </li>
+    <li style="display: inline-flex">
+        {{ include('contact_type/_delete_form.html.twig') }}
+    </li>
+</ul>
+
+{% endblock %}

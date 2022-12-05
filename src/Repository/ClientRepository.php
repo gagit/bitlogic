@@ -40,15 +40,40 @@ class ClientRepository extends ServiceEntityRepository
         }
     }
 
-    public function getClientFilter($filter): QueryBuilder
+    public function getClientFilter($filter)
     {
         $qb = $this->createQueryBuilder('q')
             ->select('q');
-        if(array_key_exists('apellidos',$filter) && $filter['apellidos'] != null) {
-            $qb->andWhere($qb->expr()->eq('q.apellidos', ':apellidos'))
-                ->setParameter('apellidos', $filter['apellidos']);
-        }
-        return  $qb;
-    }
 
+        if (array_key_exists('name', $filter) && $filter['name'] != null) {
+            $qb->andWhere($qb->expr()->eq('q.name', ':name'))
+                ->setParameter('name', $filter['name']);
+        }
+
+
+        if (array_key_exists('lastName', $filter) && $filter['lastName'] != null) {
+            $qb->andWhere($qb->expr()->eq('q.lastName', ':lastName'))
+                ->setParameter('lastName', $filter['lastName']);
+        }
+
+
+        if (array_key_exists('address', $filter) && $filter['address'] != null) {
+            $qb->andWhere($qb->expr()->eq('q.address', ':address'))
+                ->setParameter('address', $filter['address']);
+        }
+
+
+        if (array_key_exists('dateCreation', $filter) && $filter['dateCreation'] != null) {
+            $qb->andWhere($qb->expr()->eq('q.dateCreation', ':dateCreation'))
+                ->setParameter('dateCreation', $filter['dateCreation']);
+        }
+
+
+        if (array_key_exists('enabled', $filter) && $filter['enabled'] != null) {
+            $qb->andWhere($qb->expr()->eq('q.enabled', ':enabled'))
+                ->setParameter('enabled', $filter['enabled']);
+        }
+
+        return $qb;
+    }
 }

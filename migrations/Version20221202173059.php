@@ -59,16 +59,18 @@ final class Version20221202173059 extends AbstractMigration
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE SCHEMA db_accessadmin');
-        $this->addSql('CREATE SCHEMA db_backupoperator');
-        $this->addSql('CREATE SCHEMA db_datareader');
-        $this->addSql('CREATE SCHEMA db_datawriter');
-        $this->addSql('CREATE SCHEMA db_ddladmin');
-        $this->addSql('CREATE SCHEMA db_denydatareader');
-        $this->addSql('CREATE SCHEMA db_denydatawriter');
-        $this->addSql('CREATE SCHEMA db_owner');
-        $this->addSql('CREATE SCHEMA db_securityadmin');
-        $this->addSql('CREATE SCHEMA dbo');
+        //---> Saque estos comandos porque los esquemas ya existen
+
+//        $this->addSql('CREATE SCHEMA db_accessadmin');
+//        $this->addSql('CREATE SCHEMA db_backupoperator');
+//        $this->addSql('CREATE SCHEMA db_datareader');
+//        $this->addSql('CREATE SCHEMA db_datawriter');
+//        $this->addSql('CREATE SCHEMA db_ddladmin');
+//        $this->addSql('CREATE SCHEMA db_denydatareader');
+//        $this->addSql('CREATE SCHEMA db_denydatawriter');
+//        $this->addSql('CREATE SCHEMA db_owner');
+//        $this->addSql('CREATE SCHEMA db_securityadmin');
+//        $this->addSql('CREATE SCHEMA dbo');
         $this->addSql('ALTER TABLE contact_client DROP CONSTRAINT FK_57D633D45F63AD12');
         $this->addSql('ALTER TABLE contact_client DROP CONSTRAINT FK_57D633D419EB6921');
         $this->addSql('ALTER TABLE identification_client DROP CONSTRAINT FK_65A222A4F54A83F');
@@ -79,10 +81,10 @@ final class Version20221202173059 extends AbstractMigration
         $this->addSql('DROP TABLE identification_client');
         $this->addSql('DROP TABLE identification_type');
         $this->addSql('DROP TABLE messenger_messages');
-        $this->addSql('ALTER TABLE VTMCLH ADD VTMCLH_DIFDES DATETIME2(6)');
-        $this->addSql('ALTER TABLE VTMCLH ADD VTMCLH_DIFHAS DATETIME2(6)');
-        $this->addSql('ALTER TABLE VTMCLH ADD VTMCLH_FECALT DATETIME2(6)');
-        $this->addSql('ALTER TABLE VTMCLH ADD VTMCLH_FECMOD DATETIME2(6)');
-        $this->addSql('ALTER TABLE VTMCLH ADD VTMCLH_TSTAMP DATETIME2(6)');
+//        $this->addSql('ALTER TABLE VTMCLH ADD VTMCLH_DIFDES DATETIME2(6)');
+//        $this->addSql('ALTER TABLE VTMCLH ADD VTMCLH_DIFHAS DATETIME2(6)');
+//        $this->addSql('ALTER TABLE VTMCLH ADD VTMCLH_FECALT DATETIME2(6)');
+//        $this->addSql('ALTER TABLE VTMCLH ADD VTMCLH_FECMOD DATETIME2(6)');
+//        $this->addSql('ALTER TABLE VTMCLH ADD VTMCLH_TSTAMP DATETIME2(6)');
     }
 }
