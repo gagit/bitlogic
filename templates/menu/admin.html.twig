@@ -1,0 +1,49 @@
+<ul class="navbar-nav ">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="configuracion" role="button"
+           data-toggle="dropdown" aria-expanded="false">Configuración</a>
+        <div class="dropdown-menu " aria-labelledby="">
+            <a class="dropdown-item" href="{{ path('app_complejo_habitacional_index') }}">Barrios</a>
+            <a class="dropdown-item" href="{{ path('app_unidad_habitacional_index') }}">Casas</a>
+            <a class="dropdown-item" href="{{ path('app_proyecto_habitacional_index') }}">Proyectos</a>
+            <a class="dropdown-item" href="{{ path('app_tipo_documento_index') }}">Documentos</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{ path('app_tipo_complejo_habitacional_index') }}">Tipo Complejo Habitacional</a>
+            <a class="dropdown-item" href="{{ path('app_tipo_division_construccion_index') }}">Tipo División Complejo Hab.</a>
+            <a class="dropdown-item" href="{{ path('app_tipo_segmento_division_construccion_index') }}">Tipo Segmento División</a>
+            <a class="dropdown-item" href="{{ path('app_tipo_documento_index') }}">Tipo Documento</a>
+            <a class="dropdown-item" href="{{ path('app_contact_type_index') }}">Tipo Contacto</a>
+            <a class="dropdown-item" href="{{ path('app_tipo_obra_index') }}">Tipo Obra</a>
+            <a class="dropdown-item" href="{{ path('app_tipo_expediente_index') }}">Tipo Expediente</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{ path('app_localidad_index') }}">Localidad</a>
+            <a class="dropdown-item" href="{{ path('app_departamento_index') }}">Departamento</a>
+            <a class="dropdown-item" href="{{ path('app_provincia_index') }}">Provincia</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{ path('app_etapa_verificacion_index') }}">Etapas Inspección</a>
+            <a class="dropdown-item" href="{{ path('app_grupo_etapa_verificacion_index') }}">Grupos</a>
+            <a class="dropdown-item" href="{{ path('app_etapas_grupo_index') }}">Etapas X Grupo</a>
+            <a class="dropdown-item" href="{{ path('app_plantilla_seguimiento_index') }}">Plantillas Seguimiento</a>
+            <a class="dropdown-item" href="{{ path('app_control_seguimiento_index') }}">Controles para Seguimiento</a>
+        </div>
+    </li>
+</ul>
+<ul class="navbar-nav ">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="configuracion" role="button"
+           data-toggle="dropdown" aria-expanded="false">Usuarios</a>
+        <div class="dropdown-menu " aria-labelledby="">
+            <a class="dropdown-item" href="{{ path('app_register') }}"><i class="fa fa-user-plus"></i> Agregar Usuario</a>
+            <a class="dropdown-item" href="{{ path('app_user_index') }}"><i class="fa fa-list"></i> Listado Usuarios</a>
+            <a class="dropdown-item" href="{{ path('app_complejo_habitacional_usuario_index') }}">Complejos por Administradores</a>
+{#            <a class="dropdown-item" href="{{ path('app_proyecto_usuario_index') }}">Proyectos por Profesional</a>#}
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{ path('app_arquitect_index') }}">Profesionales</a>
+            <a class="dropdown-item" href="{{ path('app_propietary_index') }}">Propietarios</a>
+            <a class="dropdown-item" href="{{ path('app_rol_profesional_obra_index') }}">Rol Profesional</a>
+            <a class="dropdown-item" href="{{ path('app_contact_type_index') }}">Tipo Contacto</a>
+            <a class="dropdown-item" href="{{ path('app_identification_type_index') }}">Tipos Identificación</a>
+            <div class="dropdown-divider"></div>
+        </div>
+    </li>
+</ul>

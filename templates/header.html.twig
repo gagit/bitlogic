@@ -9,12 +9,10 @@
             <div class="collapse navbar-collapse" id="contentNavbarTop">
                 {% if is_granted('ROLE_ADMIN') %}
                     {% include 'menu/admin.html.twig' %}
-                {% elseif is_granted('ROLE_ADMIN_BARRIO') %}
-                    {% include 'menu/admin_barrio.html.twig' %}
-                {% elseif is_granted('ROLE_PROFESIONAL') %}
-                    {% include 'menu/profesional.html.twig' %}
-                {% elseif is_granted('ROLE_PROPIETARIO') %}
-                    {% include 'menu/propietario.html.twig' %}
+                {% elseif is_granted('ROLE_MARKETING') %}
+                    {% include 'menu/marketing.html.twig' %}
+                {% else  %}
+                    {% include 'menu/generic_menu.html.twig' %}
                 {% endif %}
 
         <!--Menu de usuario -->

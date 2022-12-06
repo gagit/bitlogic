@@ -8,20 +8,20 @@
                 <td>{{ client.id }}</td>
             </tr>
             <tr>
-                <th>Name</th>
+                <th>Nombre</th>
                 <td>{{ client.name }}</td>
             </tr>
             <tr>
-                <th>LastName</th>
+                <th>Apellido</th>
                 <td>{{ client.lastName }}</td>
             </tr>
             <tr>
-                <th>Address</th>
+                <th>Domicilio</th>
                 <td>{{ client.address }}</td>
             </tr>
             <tr>
-                <th>DateCreation</th>
-                <td>{{ client.dateCreation ? client.dateCreation|date('Y-m-d') : '' }}</td>
+                <th>Fecha Nac.</th>
+                <td>{{ client.dateCreation ? client.dateCreation|date('d/m/Y') : '' }}</td>
             </tr>
             <tr>
                 <th>Enabled</th>
@@ -29,6 +29,37 @@
             </tr>
         </tbody>
     </table>
+<hr/>
+<div class="container">
+    <p><strong>Identificaciones</strong></p>
+    {% for identificacion in client.identifications %}
+        <div class="row ">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <ul class="list-group-item-dark">
+                    <li class="list-group-item list-group-item-action" >
+                        {{ identificacion }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<hr/>
+<div class="container">
+    <p><strong>Contactos</strong></p>
+    {% for contact in client.contacts %}
+        <div class="row ">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <ul class="list-group-item-dark">
+                    <li class="list-group-item list-group-item-action" >
+                        {{ contact }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
 <hr/>
 <ul>
     <li style="display: inline-flex">

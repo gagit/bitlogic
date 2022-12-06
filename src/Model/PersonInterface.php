@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-use App\Entity\Identification;
+use App\Model\IdentificationInterface;
 use Doctrine\Common\Collections\Collection;
 
 interface PersonInterface
@@ -17,9 +17,9 @@ interface PersonInterface
 
     public function getIdentifications(): Collection;
 
-    public function addIdentification(Identification $identification): PersonInterface;
+    public function addIdentification(IdentificationInterface $identification): PersonInterface;
 
-    public function removeIdentification(Identification $identification): PersonInterface;
+    public function removeIdentification(IdentificationInterface $identification): PersonInterface;
 
     public function getAddress(): ?string;
 

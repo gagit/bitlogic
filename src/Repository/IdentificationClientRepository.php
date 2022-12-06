@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\IdentificactionClient;
+use App\Entity\IdentificationClient;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<IdentificactionClient>
+ * @extends ServiceEntityRepository<IdentificationClient>
  *
- * @method IdentificactionClient|null find($id, $lockMode = null, $lockVersion = null)
- * @method IdentificactionClient|null findOneBy(array $criteria, array $orderBy = null)
- * @method IdentificactionClient[]    findAll()
- * @method IdentificactionClient[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method IdentificationClient|null find($id, $lockMode = null, $lockVersion = null)
+ * @method IdentificationClient|null findOneBy(array $criteria, array $orderBy = null)
+ * @method IdentificationClient[]    findAll()
+ * @method IdentificationClient[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class IdentificationClientRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, IdentificactionClient::class);
+        parent::__construct($registry, IdentificationClient::class);
     }
 
-    public function add(IdentificactionClient $entity, bool $flush = false): void
+    public function add(IdentificationClient $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class IdentificationClientRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(IdentificactionClient $entity, bool $flush = false): void
+    public function remove(IdentificationClient $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -64,7 +64,7 @@ class IdentificationClientRepository extends ServiceEntityRepository
 //        ;
 //    }
    
-    public function getIdentificactionClientFilter($filter)
+    public function getIdentificationClientFilter($filter)
     {
         $qb = $this->createQueryBuilder('q')
                 ->select('q');

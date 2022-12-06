@@ -37,6 +37,11 @@ class IdentificationClient implements IdentificationInterface
      */
     private $client;
 
+    public function __toString()
+    {
+        return $this->getIdentificationType().' - '.$this->getIdentification();
+    }
+
     public function getId(): ?string
     {
         return $this->id;

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Model\IdentificationInterface;
 use App\Repository\ClientRepository;
 use App\Model\PersonInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -33,7 +34,7 @@ class Client implements PersonInterface
     private $lastName;
 
     /**
-     * @ORM\OneToMany(targetEntity=IdentificationClient::class, mappedBy="client")
+     * @ORM\OneToMany(targetEntity=IdentificationClient::class, mappedBy="client", cascade={"persist"})
      */
     private $identifications;
 
@@ -107,22 +108,22 @@ class Client implements PersonInterface
         return $this->identifications;
     }
 
-    public function addIdentification(Identification $identification): PersonInterface
+    public function addIdentification(IdentificationInterface $identification): PersonInterface
     {
         if (!$this->identifications->contains($identification)) {
             $this->identifications[] = $identification;
-            $identification->setPropietary($this);
+            $identification->setPerson($this);
         }
 
         return $this;
     }
 
-    public function removeIdentification(Identification $identification): PersonInterface
+    public function removeIdentification(IdentificationInterface $identification): PersonInterface
     {
         if ($this->identifications->removeElement($identification)) {
             // set the owning side to null (unless already changed)
-            if ($identification->getPropietary() === $this) {
-                $identification->setPropietary(null);
+            if ($identification->getPerson() === $this) {
+                $identification->setPerson(null);
             }
         }
 

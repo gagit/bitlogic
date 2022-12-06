@@ -97,6 +97,11 @@
                             <a class="btn btn-outline-dark" href="{{ path('app_clientesnew_edit', {'id': clientesnew.id}) }}">
                                 <i class="fa fa-edit"></i> </a>
                         </li>
+                        <li style="display: inline-flex" >
+
+                            <a class="btn btn-outline-dark" href="{{ path('app_client_convert_from_clientesnew', {'id': clientesnew.id}) }}">
+                                <i class="fa fa-cogs"></i> </a>
+                        </li>
                     </ul>
                 </td>
             </tr>

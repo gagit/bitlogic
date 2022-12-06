@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Client;
+use App\Entity\Clientesnew;
 use App\Form\ClientType;
 use App\Form\ClientFilterType;
 use App\Repository\ClientRepository;
+use App\Service\ClientHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -79,6 +81,17 @@ class ClientController extends AbstractController
      */
     public function show(Client $client): Response
     {
+        return $this->render('client/show.html.twig', [
+            'client' => $client,
+        ]);
+    }
+    /**
+     * @Route("/convert/from/clientesnew/{id}", name="app_client_convert_from_clientesnew", methods={"GET"})
+     */
+    public function convertFromClientesnew(Clientesnew $clientesnew, ClientHelper $clientHelper): Response
+    {
+        $client = $clientHelper->convertClientenewToClient($clientesnew);
+
         return $this->render('client/show.html.twig', [
             'client' => $client,
         ]);

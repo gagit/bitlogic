@@ -22,7 +22,7 @@ class IdentificationTypeType extends AbstractType
                 'label' => 'Activo'
             ])
             ->add('typeIdentification',null,[
-                'label' => 'Nombre'
+                'label' => 'Grupo'
             ])
         ;
     }

@@ -4,7 +4,7 @@ namespace App\Model;
 
 class ContactType
 {
-    const EMAIL = 'e18c1a7d-b549-44de-8612-854e63530102';
-    const CELLPHONE = 'b496216c-2a30-4a19-a0a5-aeb2da175893';
+    const EMAIL = '60283834-b363-4c51-b540-73657662dc22';
+    const CELLPHONE = 'f3e6d1a4-ff5a-4792-aee0-d7f485643158';
 
 }

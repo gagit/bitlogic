@@ -43,14 +43,6 @@ class ClientesnewController extends AbstractController
             20 /*limit per page*/
         );
 
-//        return $this->render('tarea_etapa/index.html.twig', [
-//            'formFilter' => $formFilter->createView(),
-//            'tarea_etapas' => $tareaEtapas,
-//        ]);
-//        $clientesnews = $entityManager
-//            ->getRepository(Clientesnew::class)
-//            ->findAll();
-
         return $this->render('clientesnew/index.html.twig', [
             'formFilter' => $formFilter->createView(),
             'clientesnews' => $clientesnews,
