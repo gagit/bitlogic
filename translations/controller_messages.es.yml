@@ -1,0 +1,31 @@
+controller:
+  titles:
+    filter: Filtros
+    clear_filter: Limpiar Filtros Seleccionados
+    find_filter: Buscar
+    actions: Acciones
+    list_tittle: Listado de
+    back_to_list: Volver al listado
+    add_entity: Agregar
+    show_entity: Ver
+    save_entity: Guardar
+    edit_entity: Editar
+    delete_entity: Eliminar
+    close_window: Cerrar Ventana
+    logout: Salir
+  tooltips:
+    tooltip_show: Click para ver
+    tooltip_edit: Click para editar
+    tooltip_new: Click para crear
+    tooltip_save: Click para Guardar
+    tooltip_delete: Click para borrar
+    tooltip_back: Click para volver
+    tooltip_close_window: Click para cerrar la Ventana
+  messages:
+    message_saved_ok: Los datos fueron grabados correctamente!!!
+    message_saved_error_bd: Error en la base de datos :(
+    message_saved_error_generic: Error :(
+    message_delete_ok: El registro se ha eliminado correctamente!!
+    message_if_confirm_action: Está seguro de continuar?
+    message_if_confirm_delete: Esta seguro que desea eliminar este item?
+    message_no_records_found: No se han encontrado registros!!

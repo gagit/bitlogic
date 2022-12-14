@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\IdentificationClient;
 use App\Form\IdentificationClientType;
 use App\Form\IdentificationClientFilterType;
+use App\Repository\ClientRepository;
 use App\Repository\IdentificationClientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -44,6 +45,22 @@ class IdentificationClientController extends AbstractController
         return $this->render('identification_client/index.html.twig', [
             'formFilter' => $formFilter->createView(),
             'identification_clients' => $identificationClients,
+        ]);
+    }
+
+    /**
+     * @Route("/list/{id}", name="app_identifications_client_list", methods={"GET"}, options = {"expose" = true })
+     */
+    public function indexIdentifications(IdentificationClientRepository $identificationClientRepository,
+                                         ClientRepository $clientRepository,
+                                         Request $request): Response
+    {
+        $client  = $clientRepository->find($request->get('id'));
+        $identificationsClient = $identificationClientRepository->findBy(['client'=>$client]);
+
+        return $this->render('identification_client/listIdentifications.html.twig', [
+            'client' => $client,
+            'identifications_client' => $identificationsClient,
         ]);
     }
 

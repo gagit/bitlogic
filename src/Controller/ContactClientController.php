@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\ContactClient;
 use App\Form\ContactClientType;
 use App\Form\ContactClientFilterType;
+use App\Repository\ClientRepository;
 use App\Repository\ContactClientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -47,6 +48,22 @@ class ContactClientController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/list/{id}", name="app_contacts_client_list", methods={"GET"}, options = {"expose" = true })
+     */
+    public function listContacts(ContactClientRepository $contactClientRepository,
+                                 ClientRepository $clientRepository,
+                                 Request $request): Response
+    {
+
+        $client  = $clientRepository->find($request->get('id'));
+        $contactsClient = $contactClientRepository->findBy(['client'=>$client]);
+
+        return $this->render('contact_client/listContacts.html.twig', [
+            'client' => $client,
+            'contacts_client' => $contactsClient,
+        ]);
+    }
     /**
      * @Route("/new", name="app_contact_client_new", methods={"GET", "POST"})
      */

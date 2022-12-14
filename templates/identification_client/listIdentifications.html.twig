@@ -1,0 +1,38 @@
+{% block body %}
+<h5 class="card-header bg-secondary text-light" ><i class="fa fa-list"></i>Identificaciones Cliente</h5>
+<hr/>
+    <a class="btn btn-outline-dark" href="{{ path('app_identification_client_new',{'id': client.id}) }}"><i class="fa fa-plus"></i> </a>
+<hr/>
+
+<hr/>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Tipo Identificación</th>
+                <th>Identificación</th>
+                <th>{{'controller.titles.actions' | trans({},'controller_messages') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for identification_client in identifications_client %}
+            <tr>
+                <td>{{ identification_client.identificationtype }}</td>
+                <td>{{ identification_client.identification }}</td>
+                <td>
+                    <ul>
+                        <li style="display: inline-flex" >
+                            <a class="btn btn-outline-dark" href="{{ path('app_identification_client_edit',
+                                {'id': identification_client.id}) }}">
+                                <i class="fa fa-edit"></i> </a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">{{ 'controller.messages.message_no_records_found' | trans({},'controller_messages')  }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

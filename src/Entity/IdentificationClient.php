@@ -33,7 +33,7 @@ class IdentificationClient implements IdentificationInterface
     private $identification;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="identification")
+     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="identifications")
      */
     private $client;
 

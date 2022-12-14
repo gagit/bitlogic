@@ -1,0 +1,36 @@
+{% block body %}
+<h5 class="card-header bg-secondary text-light" ><i class="fa fa-list"></i>Contactos </h5>
+<hr/>
+{#    <a class="btn btn-outline-dark" href="{{ path('app_contact_propietary_new', {'id': client.id}) }}"><i class="fa fa-plus"></i> </a>#}
+{#<hr/>#}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Tipo Contacto</th>
+                <th>Contacto</th>
+                <th>{{'controller.titles.actions' | trans({},'controller_messages') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contact_client in contacts_client %}
+            <tr>
+                <td>{{ contact_client.contacttype }}</td>
+                <td>{{ contact_client.value }}</td>
+                <td>
+                    <ul>
+                        <li style="display: inline-flex" >
+                            <a class="btn btn-outline-dark"
+                               href="{{ path('app_contact_client_edit', {'id': contact_client.id}) }}">
+                                <i class="fa fa-edit"></i> </a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">{{ 'controller.messages.message_no_records_found' | trans({},'controller_messages')  }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

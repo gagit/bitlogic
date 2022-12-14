@@ -7,7 +7,43 @@
 <h5 class="card-header bg-secondary text-light" ><i class="fa fa-edit"></i>
     Editar Cliente  </h5>
 <hr/>
-    {{ include('client/_form.html.twig') }}
+    <div class="card-body">
+        <ul class="nav nav-tabs" id="tabPanelClient" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" id="datosPersonales-link" data-toggle="tab"
+                   href="#datosPersonales-tab" role="tab" aria-controls="home" aria-selected="true">
+                    <i class="fa fa-file"></i> Datos Personales</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="identifications-link" data-toggle="tab" data-person="{{ client.id }}"
+                   href="#identifications-tab" role="tab" aria-controls="identificaciones" aria-selected="true">
+                    <i class="fa fa-fingerprint"></i> Identificaciones</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="contacts-link" data-toggle="tab" data-person="{{ client.id }}"
+                   href="#contacts-tab" role="tab" aria-controls="contactos" aria-selected="true">
+                    <i class="fa fa-phone"></i> Contactos</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active " id="datosPersonales-tab" role="tabpanel" aria-labelledby="datosPersonales-link">
+                <br/>
+                {{ include('client/_form.html.twig') }}
+            </div>
+            <div class="tab-pane fade" id="identifications-tab" role="tabpanel" aria-labelledby="identifications-link">
+
+            </div>
+            <div class="tab-pane fade" id="contacts-tab" role="tabpanel" aria-labelledby="contacts-link">
+
+            </div>
+        </div>
+        <br>
+    </div>
+
+
+
+
+
 
 <hr/>
 <ul>
@@ -21,4 +57,8 @@
     </li>
 </ul>
 
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('edit_client') }}
 {% endblock %}
