@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Model\ClientesDikterInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="VTMCLH")
  * @ORM\Entity
  */
-class Vtmclh
+class Vtmclh implements ClientesDikterInterface
 {
     /**
      * @var string
@@ -3300,4 +3301,8 @@ class Vtmclh
     }
 
 
+    public function getId(): ?string
+    {
+        return $this->getVtmclhNrocta();
+    }
 }

@@ -15,12 +15,6 @@ interface PersonInterface
 
     public function setLastName(string $lastName);
 
-    public function getIdentifications(): Collection;
-
-    public function addIdentification(IdentificationInterface $identification): PersonInterface;
-
-    public function removeIdentification(IdentificationInterface $identification): PersonInterface;
-
     public function getAddress(): ?string;
 
     public function setAddress(?string $address): PersonInterface;
@@ -32,4 +26,22 @@ interface PersonInterface
     public function isEnabled(): ?bool;
 
     public function setEnabled(bool $enabled): PersonInterface;
+
+    public function isLegalPerson(): ?bool;
+
+    public function setLegalPerson(bool $enabled): PersonInterface;
+
+    public function getGender(): ?string;
+
+    public function setGender(?string $address): PersonInterface;
+    public function getIdentifications(): Collection;
+
+    public function addIdentification(IdentificationInterface $identification): PersonInterface;
+
+    public function removeIdentification(IdentificationInterface $identification): PersonInterface;
+    public function getContacts(): Collection;
+
+    public function addContact(ContactInterface $identification): PersonInterface;
+
+    public function removeContact(ContactInterface  $identification): PersonInterface;
 }

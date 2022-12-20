@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Model\ClientesDikterInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="distribucionpedidosclientes")
  * @ORM\Entity
  */
-class Distribucionpedidosclientes
+class Distribucionpedidosclientes implements ClientesDikterInterface
 {
     /**
      * @var string

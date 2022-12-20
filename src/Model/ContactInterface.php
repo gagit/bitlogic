@@ -7,7 +7,7 @@ namespace App\Model;
  * IContacto
  *
  */
-interface IContacto
+interface ContactInterface
 {
 
     /**
@@ -17,7 +17,7 @@ interface IContacto
 
     /**
      * @param string $tipoContacto
-     * @return IContacto
+     * @return ContactInterface
      */
     public function setContactType($tipoContacto);
 
@@ -26,7 +26,7 @@ interface IContacto
      *
      * @param string $valor
      *
-     * @return IContacto
+     * @return ContactInterface
      */
     public function setContactValue($valorContacto);
 
@@ -43,9 +43,9 @@ interface IContacto
      *
      * @param IPersona $persona
      *
-     * @return IContacto
+     * @return ContactInterface
      */
-    public function setPerson(PersonInterface $persona): IContacto;
+    public function setPerson(PersonInterface $persona): ContactInterface;
 
     /**
      * Get persona

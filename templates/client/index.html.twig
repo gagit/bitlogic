@@ -41,7 +41,7 @@
                 <td>{{ client.lastName }}</td>
                 <td>{{ client.address }}</td>
                 <td>{{ client.dateCreation ? client.dateCreation|date('d-m-Y') : '' }}</td>
-                <td>{{ client.enabled ? 'Yes' : 'No' }}</td>
+                <td>{{ client.enabled ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times text-danger"></i>' }}</td>
                 <td>
                     <ul>
                         <li style="display: inline-flex" >

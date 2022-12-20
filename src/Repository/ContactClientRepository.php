@@ -38,32 +38,6 @@ class ContactClientRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
-//    /**
-//     * @return ContactClient[] Returns an array of ContactClient objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?ContactClient
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
-   
     public function getContactClientFilter($filter)
     {
         $qb = $this->createQueryBuilder('q')
@@ -73,8 +47,7 @@ class ContactClientRepository extends ServiceEntityRepository
                     $qb->andWhere($qb->expr()->eq('q.value', ':value'))
                         ->setParameter('value', $filter['value']);
         }
-
-                    return  $qb;
+        return  $qb;
     }   
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Model\ContactInterface;
 use App\Model\IdentificationInterface;
 use App\Repository\ClientRepository;
 use App\Model\PersonInterface;
@@ -57,6 +58,16 @@ class Client implements PersonInterface
      * @ORM\OneToMany(targetEntity=ContactClient::class, mappedBy="client", cascade={"persist"})
      */
     private $contacts;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $legalPerson;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $gender;
 
 
     public function __construct()
@@ -165,7 +176,7 @@ class Client implements PersonInterface
 
         return $this;
     }
-  public function addContact(ContactClient $contactClient): self
+  public function addContact(ContactInterface $contactClient): PersonInterface
     {
         if (!$this->contacts->contains($contactClient)) {
             $this->contacts[] = $contactClient;
@@ -175,7 +186,7 @@ class Client implements PersonInterface
         return $this;
     }
 
-    public function removeContact(ContactClient $contactClient): self
+    public function removeContact(ContactInterface  $contactClient): PersonInterface
     {
         if ($this->contacts->removeElement($contactClient)) {
             // set the owning side to null (unless already changed)
@@ -194,4 +205,25 @@ class Client implements PersonInterface
         return $this->contacts;
     }
 
+    public function isLegalPerson(): ?bool
+    {
+        return $this->legalPerson;
+    }
+
+    public function setLegalPerson(bool $enabled): PersonInterface
+    {
+        $this->legalPerson = $enabled;
+        return $this;
+    }
+
+    public function getGender(): ?string
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?string $gender): PersonInterface
+    {
+        $this->gender=$gender;
+        return $this;
+    }
 }
