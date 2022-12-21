@@ -136,6 +136,6 @@ class IdentificationClientController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_identification_client_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_client_edit', ['id' => $identificationClient->getClient()->getId()], Response::HTTP_SEE_OTHER);
     }
 }

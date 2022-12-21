@@ -137,6 +137,6 @@ class ContactClientController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_contact_client_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_client_edit', ['id' => $contactClient->getClient()->getId()], Response::HTTP_SEE_OTHER);
     }
 }
