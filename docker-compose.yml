@@ -9,7 +9,7 @@ services:
     volumes:
       - .:/var/www/html/dikter
     ports:
-      - 7004:80
+      - 80:80
     depends_on:
       - php-dikter
   php-dikter:
