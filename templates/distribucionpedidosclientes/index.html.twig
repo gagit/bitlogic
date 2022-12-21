@@ -21,6 +21,7 @@
     {{ knp_pagination_render(distribucionpedidosclientes) }}
 </div>
 <hr/>
+<div class="table-responsive">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -71,6 +72,11 @@
                             <a class="btn btn-outline-dark" href="{{ path('app_distribucionpedidosclientes_edit', {'id': distribucionpedidoscliente.id}) }}">
                                 <i class="fa fa-edit"></i> </a>
                         </li>
+                        <li style="display: inline-flex" >
+
+                            <a class="btn btn-outline-dark" href="{{ path('app_client_convert_from_distribucionpedidosclientes', {'id': distribucionpedidoscliente.id}) }}">
+                                <i class="fa fa-cogs"></i> </a>
+                        </li>
                     </ul>
                 </td>
             </tr>
@@ -81,6 +87,7 @@
         {% endfor %}
         </tbody>
     </table>
+</div>
     <hr/>
     <div class="navigation">
         {{ knp_pagination_render(distribucionpedidosclientes) }}

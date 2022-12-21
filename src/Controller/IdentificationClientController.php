@@ -12,6 +12,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -104,7 +105,7 @@ class IdentificationClientController extends AbstractController
     /**
      * @Route("/{id}/edit", name="app_identification_client_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, IdentificationClient $identificationClient, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, IdentificationClient $identificationClient, EntityManagerInterface $entityManager, Session $session): Response
     {
         $form = $this->createForm(IdentificationClientType::class, $identificationClient);
         $form->handleRequest($request);
@@ -112,13 +113,10 @@ class IdentificationClientController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             try{
                 $entityManager->flush();
-                $this->get('session')->getFlashBag()->add('notice', 'El cambio se realizó correctamente!');
-
-                return $this->redirectToRoute('app_identification_client_index', [], Response::HTTP_SEE_OTHER);
-            } catch (\Doctrine\DBAL\DBALException $DBalEx) {
-                $this->get('session')->getFlashBag()->add('error', 'Se ha producido un error en la base de datos!!. '. $DBalEx->getMessage() );
+                $session->getFlashBag()->add('notice', 'El cambio se realizó correctamente!');
+                return $this->redirectToRoute('app_client_edit', ['id' => $identificationClient->getClient()->getId()], Response::HTTP_SEE_OTHER);
             } catch (\Exception $ex) {
-                $this->get('session')->getFlashBag()->add('error', 'Upss! - '.$ex->getMessage());
+                $session->getFlashBag()->add('error', 'Upss! - '.$ex->getMessage());
             }
        }
 

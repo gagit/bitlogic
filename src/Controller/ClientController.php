@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Client;
 use App\Entity\Clientesnew;
+use App\Entity\Distribucionpedidosclientes;
+use App\Entity\Vtmclh;
 use App\Form\ClientType;
 use App\Form\ClientFilterType;
 use App\Repository\ClientRepository;
@@ -91,6 +93,30 @@ class ClientController extends AbstractController
     public function convertFromClientesnew(Clientesnew $clientesnew, ClientHelper $clientHelper): Response
     {
         $client = $clientHelper->convertClientenewToClient($clientesnew);
+
+        return $this->render('client/show.html.twig', [
+            'client' => $client,
+        ]);
+    }
+
+    /**
+     * @Route("/convert/from/distribucionpedidosclientes/{id}", name="app_client_convert_from_distribucionpedidosclientes", methods={"GET"})
+     */
+    public function convertFromDistribucionpedidosclientes(Distribucionpedidosclientes $distribucionpedidosclientes, ClientHelper $clientHelper): Response
+    {
+        $client = $clientHelper->convertDistribucionpedidosclientesToClient($distribucionpedidosclientes);
+
+        return $this->render('client/show.html.twig', [
+            'client' => $client,
+        ]);
+    }
+
+    /**
+     * @Route("/convert/from/vtmclh/{id}", name="app_client_convert_from_vtmclh", methods={"GET"})
+     */
+    public function convertFromVtmclh(Vtmclh $vtmclh, ClientHelper $clientHelper): Response
+    {
+        $client = $clientHelper->convertVtlmclhToClient($vtmclh);
 
         return $this->render('client/show.html.twig', [
             'client' => $client,

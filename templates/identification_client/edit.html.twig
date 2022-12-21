@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Editar IdentificationClient{% endblock %}
+{% block title %}Editar Identificaciones{% endblock %}
 
 {% block body %}
 
 <h5 class="card-header bg-secondary text-light" ><i class="fa fa-edit"></i>
-    Editar IdentificationClient index </h5>
+    Editar Identificaciones</h5>
 <hr/>
     {{ include('identification_client/_form.html.twig') }}
 
 <hr/>
 <ul>
     <li style="display: inline-flex">
-        <a href="{{ path('app_identification_client_index') }}" class="btn btn-outline-info btn-back" data-toggle="tooltip" data-placement="top"
+        <a href="{{ path('app_client_edit', {'id': identification_client.client.id}) }}" class="btn btn-outline-info btn-back" data-toggle="tooltip" data-placement="top"
            title="Volver"
         ><i class="fa fa-arrow-left"></i></a>
     </li>

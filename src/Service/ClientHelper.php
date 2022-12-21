@@ -36,7 +36,7 @@ class ClientHelper
             $client->setName($clientesnew->getNombres()) ;
             $client->setLastName($clientesnew->getApellidos()) ;
             $client->setDateCreation($clientesnew->getFechanacimiento()) ;
-            $client->setDateCreation($clientesnew->getFechanacimiento()) ;
+            $client->setLegalPerson(false) ;
             $client->setEnabled(true) ;
             //---
             $emailClient = new ContactClient();
@@ -73,12 +73,12 @@ class ClientHelper
     {
         $client = $this->entityManager->getRepository(Client::class)->getClientByIdEntity($distribucionpedidosclientes);
         if (is_null($client)) {
-            die("nada!!!");
             $client = new Client();
-
             $client->setName($distribucionpedidosclientes->getNombre());
             $client->setLastName($distribucionpedidosclientes->getApellido());
 //        $client->setDateCreation($distribucionpedidosclientes->get()) ;
+            $client->setAddress($distribucionpedidosclientes->getDireccion1()) ;
+            $client->setLegalPerson(false) ;
             $client->setEnabled(true);
             //---
             $emailClient = new ContactClient();
@@ -95,7 +95,7 @@ class ClientHelper
             //------
             $idClientesnew = new IdentificationClient();
             $idClientesnew->setIdentificationType($this->entityManager->getRepository(IdentificationType::class)
-                ->find(\App\Model\IdentificationType::ID_CLIENTESNEW));
+                ->find(\App\Model\IdentificationType::ID_DISTRIBUCIONPEDIDOSCLIENTES));
             $idClientesnew->setIdentification($distribucionpedidosclientes->getId());
             $client->addIdentification($idClientesnew);
 
@@ -105,7 +105,7 @@ class ClientHelper
                 getRepository(IdentificationType::class)
                     ->find(\App\Model\IdentificationType::DNI));
             $dniClientesnew->setIdentification(
-                $distribucionpedidosclientes->getNrodoc());
+                $distribucionpedidosclientes->getNrodocumento());
             $client->addIdentification($dniClientesnew);
 
 
@@ -123,36 +123,51 @@ class ClientHelper
         if (is_null($client)) {
             $client = new Client();
 
-            $client->setName($vtmclh->getNombre());
-            $client->setLastName($vtmclh->getApellido());
+            $client->setName($vtmclh->getVtmclhNombre());
+            $client->setLastName(trim($vtmclh->getVtmclhApell1().' '.$vtmclh->getVtmclhApell2()));
 //        $client->setDateCreation($distribucionpedidosclientes->get()) ;
+            $client->setAddress(trim($vtmclh->getVtmclhDirecc().' '.$vtmclh->getVtmclhNumero())) ;
+            $client->setLegalPerson(true) ;
             $client->setEnabled(true);
             //---
             $emailClient = new ContactClient();
-            $emailClient->setValue($vtmclh->getEmail());
+            $emailClient->setValue($vtmclh->getVtmclhDireml());
             $emailClient->setContactType($this->entityManager->getRepository(ContactType::class)
                 ->find(\App\Model\ContactType::EMAIL));
             $client->addContact($emailClient);
 
             $cellphoneClient = new ContactClient();
-            $cellphoneClient->setValue($vtmclh->getTelefono());
+            $cellphoneClient->setValue($vtmclh->getVtmclhTelefn());
             $cellphoneClient->setContactType($this->entityManager->getRepository(ContactType::class)
-                ->find(\App\Model\ContactType::CELLPHONE));
+                ->find(\App\Model\ContactType::TELEFONO_FIJO));
             $client->addContact($cellphoneClient);
-            //------
+            //------------------------
+            //------IDENTIFICACIONES--
+            //------------------------
             $idClientesnew = new IdentificationClient();
             $idClientesnew->setIdentificationType($this->entityManager->getRepository(IdentificationType::class)
-                ->find(\App\Model\IdentificationType::ID_CLIENTESNEW));
+                ->find(\App\Model\IdentificationType::ID_VTMCLH));
             $idClientesnew->setIdentification($vtmclh->getId());
             $client->addIdentification($idClientesnew);
 
             $dniClientesnew = new IdentificationClient();
-            $dniClientesnew->setIdentificationType(
-                $this->entityManager->
-                getRepository(IdentificationType::class)
-                    ->find(\App\Model\IdentificationType::DNI));
+            switch($vtmclh->getVtmclhTipdoc()){
+                case 80:
+                    $dniClientesnew->setIdentificationType(
+                        $this->entityManager->
+                        getRepository(IdentificationType::class)
+                            ->find(\App\Model\IdentificationType::CUIT));
+                    break;
+                case 86:
+                    $dniClientesnew->setIdentificationType(
+                        $this->entityManager->
+                        getRepository(IdentificationType::class)
+                            ->find(\App\Model\IdentificationType::CUIL));
+                    break;
+            }
+
             $dniClientesnew->setIdentification(
-                $vtmclh->getNrodoc());
+                $vtmclh->getVtmclhNrodoc());
             $client->addIdentification($dniClientesnew);
 
 

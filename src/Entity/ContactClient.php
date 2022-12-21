@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Model\ContactInterface;
+use App\Model\PersonInterface;
 use App\Repository\ContactClientRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
@@ -9,7 +11,7 @@ use Ramsey\Uuid\Doctrine\UuidGenerator;
 /**
  * @ORM\Entity(repositoryClass=ContactClientRepository::class)
  */
-class ContactClient
+class ContactClient implements ContactInterface
 {
     /**
      * @ORM\Id
@@ -78,5 +80,27 @@ class ContactClient
         $this->client = $client;
 
         return $this;
+    }
+
+    public function setContactValue($valorContacto)
+    {
+        $this->setContactValue($valorContacto);
+    }
+
+    public function getContactValue()
+    {
+        return $this->getValue();
+    }
+
+    public function setPerson(PersonInterface $persona): ContactInterface
+    {
+        $this->setClient($persona);
+        return $this;
+
+    }
+
+    public function getPerson(): PersonInterface
+    {
+        return $this->getClient();
     }
 }

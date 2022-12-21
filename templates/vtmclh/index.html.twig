@@ -314,6 +314,12 @@
                             <a class="btn btn-outline-dark" href="{{ path('app_vtmclh_edit', {'vtmclhNrocta': vtmclh.vtmclhNrocta}) }}">
                                 <i class="fa fa-edit"></i> </a>
                         </li>
+                        <li style="display: inline-flex" >
+
+                            <a class="btn btn-outline-dark" href="{{ path('app_client_convert_from_vtmclh', {'id': vtmclh.id}) }}">
+                                <i class="fa fa-cogs"></i> </a>
+                        </li>
+
                     </ul>
                 </td>
             </tr>

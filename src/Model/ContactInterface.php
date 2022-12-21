@@ -3,6 +3,8 @@
 
 namespace App\Model;
 
+use App\Entity\ContactType;
+
 /**
  * IContacto
  *
@@ -16,10 +18,10 @@ interface ContactInterface
     public function getContactType();
 
     /**
-     * @param string $tipoContacto
+     * @param ?ContactType $contactType
      * @return ContactInterface
      */
-    public function setContactType($tipoContacto);
+    public function setContactType(?ContactType $contactType);
 
     /**
      * Set valor

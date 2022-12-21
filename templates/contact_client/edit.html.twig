@@ -5,13 +5,13 @@
 {% block body %}
 
 <h5 class="card-header bg-secondary text-light" ><i class="fa fa-edit"></i>
-    Editar Contacto Cliente </h5>
+    Editar Contacto </h5>
 <hr/>
     {{ include('contact_client/_form.html.twig') }}
 <hr/>
 <ul>
     <li style="display: inline-flex">
-        <a href="{{ path('app_client_edit',{'id': contact_client.client.id }) }}" class="btn btn-outline-info btn-back" data-toggle="tooltip" data-placement="top"
+        <a href="{{ path('app_client_edit', {'id': contact_client.id}) }}" class="btn btn-outline-info btn-back" data-toggle="tooltip" data-placement="top"
            title="Volver"
         ><i class="fa fa-arrow-left"></i></a>
     </li>
