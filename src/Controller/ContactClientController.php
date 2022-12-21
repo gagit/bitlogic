@@ -68,7 +68,7 @@ class ContactClientController extends AbstractController
     /**
      * @Route("/new", name="app_contact_client_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, Session $session): Response
     {
         $contactClient = new ContactClient();
         $form = $this->createForm(ContactClientType::class, $contactClient);
@@ -77,12 +77,10 @@ class ContactClientController extends AbstractController
             try{
                 $entityManager->persist($contactClient);
                 $entityManager->flush();
-                $this->get('session')->getFlashBag()->add('notice', 'El cambio se realizó correctamente!');
+                $session->getFlashBag()->add('notice', 'El cambio se realizó correctamente!');
                 return $this->redirectToRoute('app_contact_client_index', [], Response::HTTP_SEE_OTHER);
-            } catch (\Doctrine\DBAL\DBALException $DBalEx) {
-                $this->get('session')->getFlashBag()->add('error', 'Se ha producido un error en la base de datos!!. '. $DBalEx->getMessage() );
             } catch (\Exception $ex) {
-                $this->get('session')->getFlashBag()->add('error', 'Upss! - '.$ex->getMessage());
+                $session->getFlashBag()->add('error', 'Upss! - '.$ex->getMessage());
             }
         }
 
