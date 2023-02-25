@@ -1,21 +1,21 @@
 version: '3'
 
 services:
-  webserver-dikter:
-    container_name: webserver-dikter
+  webserver-bitlogic:
+    container_name: webserver-bitlogic
     build:
       context: ./config/docker/nginx
       dockerfile: Dockerfile
     volumes:
-      - .:/var/www/html/dikter
+      - .:/var/www/html/bitlogic
     ports:
       - 7004:80
     depends_on:
-      - php-dikter
-  php-dikter:
+      - php-bitlogic
+  php-bitlogic:
     env_file:
       - ./.env_docker
-    container_name: php-dikter
+    container_name: php-bitlogic
     build:
       context: ./config/docker/php/
       dockerfile: Dockerfile
@@ -23,11 +23,13 @@ services:
       - 9000
       - 9003
     environment:
-      PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
-      PHP_XDEBUG_ENABLED: ${PHP_XDEBUG_ENABLED}
+      PHP_IDE_CONFIG: bitlogic-php
+      PHP_XDEBUG_ENABLED: 1
+#      PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
+#      PHP_XDEBUG_ENABLED: ${PHP_XDEBUG_ENABLED}
       APP_DEV: dev
     volumes:
-      - ./:/var/www/html/dikter
+      - ./:/var/www/html/bitlogic
       - ./config/docker/php/xdebug-linux.ini:/usr/local/etc/php/conf.d/xdebug.ini
 
 #version: '3'

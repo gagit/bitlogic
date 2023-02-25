@@ -30,11 +30,11 @@ RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
 RUN install-php-extensions yaml xdebug gd intl @composer apcu xml  &&\
     docker-php-ext-enable --ini-name 06-yaml.ini yaml apcu gd intl xdebug
 
-RUN pecl install sqlsrv
-RUN pecl install pdo_sqlsrv
-COPY sqlsrv.ini /usr/local/etc/php/conf.d/sqlsrv.ini
-COPY pdo_sqlsrv.ini /usr/local/etc/php/conf.d/pdo_sqlsrv.ini
-RUN docker-php-ext-enable  sqlsrv pdo_sqlsrv
+#RUN pecl install sqlsrv
+#RUN pecl install pdo_sqlsrv
+#COPY sqlsrv.ini /usr/local/etc/php/conf.d/sqlsrv.ini
+#COPY pdo_sqlsrv.ini /usr/local/etc/php/conf.d/pdo_sqlsrv.ini
+#RUN docker-php-ext-enable  sqlsrv pdo_sqlsrv
 #RUN phpenmod -v 7.4 sqlsrv pdo_sqlsrv
 
 ################
@@ -47,5 +47,5 @@ RUN apt update
 RUN apt install yarn
 ################
 
-WORKDIR /var/www/html/dikter/
+WORKDIR /var/www/html/bitlogic/
 
