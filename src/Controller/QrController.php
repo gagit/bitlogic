@@ -66,31 +66,26 @@ class QrController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             try{
-                $siteUrl = $form->getName('url');
-//                $siteUrl = $this->getParameter('app.url');
-//                $qrRoute = $router->generate('proyecto_habitacional_qr_client_view', ['id' => $proyecto_habitacional->getId()]);
+                $siteUrl = $form->getData('url');
+                if(array_key_exists('url',$siteUrl)){
+                    $result = Builder::create()
+                        ->encoding(new Encoding('UTF-8'))
+                        ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
+                        ->data($siteUrl['url'])
+                        ->size(250)
+                        ->margin(-5)
+                        ->build();
+                }
 
-                $result = Builder::create()
-                    ->encoding(new Encoding('UTF-8'))
-                    ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
-                    ->data($siteUrl)
-                    ->size(250)
-                    ->margin(-5)
-                    ->build();
 
                 return new Response($result->getString(), 200, ['Content-Type' => 'image/png']);
-//                $entityManager->persist($client);
-//                $entityManager->flush();
-//                $session->getFlashBag()->add('notice', 'El cambio se realizó correctamente!');
-//                return $this->redirectToRoute('app_client_index', [], Response::HTTP_SEE_OTHER);
-
             } catch (Exception $ex) {
                 $session->getFlashBag()->add('error', 'Upss! - '.$ex->getMessage());
             }
         }
 
-        return $this->renderForm('client/new.html.twig', [
-            'client' => $client,
+        return $this->renderForm('qr/new.html.twig', [
+//            'client' => $client,
             'form' => $form,
         ]);
     }
