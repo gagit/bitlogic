@@ -1,13 +1,6 @@
 doctrine:
     dbal:
-#        url: '%env(resolve:DATABASE_URL)%'
-        driver: sqlsrv
-        host: 172.16.1.235
-#        port: 1433
-        default_dbname: ClientesDikter
-        user: clientestest
-        password: Dikter2022#
-        charset: UTF-8
+        url: '%env(resolve:DATABASE_URL)%'
         options:
             Encrypt: false
 #            !php/const PDO::SQLSR: false
