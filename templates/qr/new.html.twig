@@ -9,6 +9,76 @@
 <hr/>
     {{ include('qr/_form.html.twig') }}
 <hr/>
+
+    {% if image %}
+        <div class="container">
+            <div class="row">
+                <div class="col-4" style="margin: auto; ">
+                    <strong>QR CODE</strong>
+                </div>
+                <div class="col-8">
+                    <div class="thumbnail" style="margin-right: auto; margin-left: auto; ">
+                        <img class="img-responsive " src="data:image/png;base64,
+                                        {{ image }}" width="200" height="200"
+                                            alt="No hay imagen disponible"/>
+                    </div>
+                </div>
+
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-6 text-right m-0">
+{#                    <button id="btnImprimirDiv" class="btn btn-outline-dark">  <i class="fa fa-print"></i> Imprimir</button>#}
+                </div>
+                <div class="col-6 text-left m-0">
+                    <form action="{{ path('app_client_getImageQr') }}" method="post">
+                        <input type="hidden" name="urlQr" id="urlQr" value="{{ url }}">
+                        <button class="btn btn-outline-dark">
+                            <i class="fa fa-download"></i>Donwload
+                        </button>
+{#                        <a type="button" class="btn btn-outline-dark btn-show"#}
+{#                           download="qrCode"#}
+{#                           href="{{ path('app_client_getImageQr',{'url': url}) }}">#}
+{#                            <i class="fa fa-download"></i> #}
+{#                        </a>#}
+                    </form>
+
+                </div>
+            </div>
+        </div>
+{#        <div id="qr-image" class="d-none" style="margin:auto; ">#}
+{#            <img src="{{ qr_code_data_uri(url('proyecto_habitacional_qr_client_view', {'id': proyecto_habitacional.id}), 'png400' ) }}"#}
+{#                 alt="Proyecto Habitacional" style="display: block; margin: auto;  "/>#}
+
+{#        </div>#}
+        <script>
+            document.querySelector("#btnImprimirDiv").addEventListener("click", function () {
+
+                const div = document.querySelector("#qr-image");
+
+                imprimirElemento(div);
+            });
+
+            function imprimirElemento(elemento) {
+
+                const ventana = window.open('', 'PRINT', 'height=400,width=600');
+                ventana.document.write('<html><head><title>' + document.title + '</title>');
+                ventana.document.write('</head><body >');
+                ventana.document.write(elemento.innerHTML);
+                ventana.document.write('</body></html>');
+                ventana.document.close();
+                ventana.focus();
+                ventana.onload = function () {
+                    ventana.print();
+                    ventana.close();
+                };
+                return true;
+            }
+        </script>
+
+
+    {% endif %}
+
 <ul>
     <li style="display: inline-flex">
 {#        <a href="{{ path('app_client_index') }}" class="btn btn-outline-info btn-back" data-toggle="tooltip" data-placement="top"#}

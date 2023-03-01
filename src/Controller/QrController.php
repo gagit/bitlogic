@@ -64,10 +64,12 @@ class QrController extends AbstractController
     {
         $form = $this->createForm(QrType::class);
         $form->handleRequest($request);
+        $img = null;
+        $url = "";
         if ($form->isSubmitted() && $form->isValid()) {
-            try{
+            try {
                 $siteUrl = $form->getData('url');
-                if(array_key_exists('url',$siteUrl)){
+                if (array_key_exists('url', $siteUrl)) {
                     $result = Builder::create()
                         ->encoding(new Encoding('UTF-8'))
                         ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
@@ -75,19 +77,49 @@ class QrController extends AbstractController
                         ->size(250)
                         ->margin(-5)
                         ->build();
+                    $url = $siteUrl['url'];
                 }
+                $img = base64_encode($result->getString());
+            } catch (Exception $ex) {
+                $session->getFlashBag()->add('error', 'Upss! - ' . $ex->getMessage());
+            }
+        }
 
+        return $this->renderForm('qr/new.html.twig', [
+            'form' => $form,
+            'image' => $img,
+            'url' => $url,
+        ]);
+    }
 
-                return new Response($result->getString(), 200, ['Content-Type' => 'image/png']);
+     /**
+     * @Route("/getImageQr/", name="app_client_getImageQr", methods={"GET", "POST"})
+     */
+    public function getImageQr(Request $request, Session $session): Response
+    {
+        $url = $request->get('urlQr');
+        if ($url) {
+            try{
+                $result = Builder::create()
+                    ->encoding(new Encoding('UTF-8'))
+                    ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
+                    ->data($url)
+                    ->size(250)
+                    ->margin(-5)
+                    ->build();
+
+                return new Response($result->getString(), 200,
+                    [
+                        'Content-Disposition' => 'attachment; filename="QrCode-'.random_int(1,50000).'.png"',
+                        'Content-Type' => 'image/png'
+                    ]
+                );
             } catch (Exception $ex) {
                 $session->getFlashBag()->add('error', 'Upss! - '.$ex->getMessage());
             }
         }
 
-        return $this->renderForm('qr/new.html.twig', [
-//            'client' => $client,
-            'form' => $form,
-        ]);
+        return new Response('Resourse No Found',404);
     }
 
     /**
@@ -99,77 +131,5 @@ class QrController extends AbstractController
             'client' => $client,
         ]);
     }
-    /**
-     * @Route("/convert/from/clientesnew/{id}", name="app_client_convert_from_clientesnew", methods={"GET"})
-     */
-    public function convertFromClientesnew(Clientesnew $clientesnew, ClientHelper $clientHelper): Response
-    {
-        $client = $clientHelper->convertClientenewToClient($clientesnew);
 
-        return $this->render('client/show.html.twig', [
-            'client' => $client,
-        ]);
-    }
-
-    /**
-     * @Route("/convert/from/distribucionpedidosclientes/{id}", name="app_client_convert_from_distribucionpedidosclientes", methods={"GET"})
-     */
-    public function convertFromDistribucionpedidosclientes(Distribucionpedidosclientes $distribucionpedidosclientes, ClientHelper $clientHelper): Response
-    {
-        $client = $clientHelper->convertDistribucionpedidosclientesToClient($distribucionpedidosclientes);
-
-        return $this->render('client/show.html.twig', [
-            'client' => $client,
-        ]);
-    }
-
-    /**
-     * @Route("/convert/from/vtmclh/{id}", name="app_client_convert_from_vtmclh", methods={"GET"})
-     */
-    public function convertFromVtmclh(Vtmclh $vtmclh, ClientHelper $clientHelper): Response
-    {
-        $client = $clientHelper->convertVtlmclhToClient($vtmclh);
-
-        return $this->render('client/show.html.twig', [
-            'client' => $client,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="app_client_edit", methods={"GET", "POST"})
-     */
-    public function edit(Request $request, Client $client, EntityManagerInterface $entityManager,Session $session): Response
-    {
-        $form = $this->createForm(ClientType::class, $client);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            try{
-                $entityManager->flush();
-                $session->getFlashBag()->add('notice', 'El cambio se realizó correctamente!');
-
-                return $this->redirectToRoute('app_client_index', [], Response::HTTP_SEE_OTHER);
-            } catch (Exception $ex) {
-                $session->getFlashBag()->add('error', 'Upss! - '.$ex->getMessage());
-            }
-       }
-
-        return $this->renderForm('client/edit.html.twig', [
-            'client' => $client,
-            'form' => $form,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="app_client_delete", methods={"POST"})
-     */
-    public function delete(Request $request, Client $client, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$client->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($client);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('app_client_index', [], Response::HTTP_SEE_OTHER);
-    }
 }
