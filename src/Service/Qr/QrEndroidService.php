@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Services\Qr;
+namespace App\Service\Qr;
 
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
