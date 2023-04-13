@@ -28,37 +28,9 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class QrController extends AbstractController
 {
-    /**
-     * @Route("/index", name="app_client_index", methods={"GET"})
-     */
-    public function index(ClientRepository $clientRepository,Request $request, PaginatorInterface $paginator): Response
-    {
-        $formFilter = $this->createForm(ClientFilterType::class, null,[
-                'method' => 'GET',
-                'attr' => [
-                    'id' => 'idFilter',
-                    'name' => 'filter',
-                    'class' => 'px-4 py-3',
-                ]
-            ]
-        );
-        $formFilter->handleRequest($request);
-        $filter = $formFilter->isSubmitted() ? $formFilter->getData() : [];
-
-        $clients = $paginator->paginate(
-                $clientRepository->getClientFilter($filter), /* query NOT result */
-                $request->query->getInt('page', 1)/*page number*/,
-                20 /*limit per page*/
-            );
-
-        return $this->render('client/index.html.twig', [
-            'formFilter' => $formFilter->createView(),
-            'clients' => $clients,
-        ]);
-    }
 
     /**
-     * @Route("/new", name="app_client_new", methods={"GET", "POST"})
+     * @Route("/new", name="app_qr_new", methods={"GET", "POST"})
      */
     public function new(Request $request, Session $session): Response
     {
@@ -122,14 +94,5 @@ class QrController extends AbstractController
         return new Response('Resourse No Found',404);
     }
 
-    /**
-     * @Route("/{id}", name="app_client_show", methods={"GET"})
-     */
-    public function show(Client $client): Response
-    {
-        return $this->render('client/show.html.twig', [
-            'client' => $client,
-        ]);
-    }
 
 }

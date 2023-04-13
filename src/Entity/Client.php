@@ -69,6 +69,11 @@ class Client implements PersonInterface
      */
     private $gender;
 
+    /**
+     * @ORM\OneToOne(targetEntity=ClientTramasica::class, mappedBy="client", cascade={"persist", "remove"})
+     */
+    private $clientTramasica;
+
 
     public function __construct()
     {
@@ -224,6 +229,28 @@ class Client implements PersonInterface
     public function setGender(?string $gender): PersonInterface
     {
         $this->gender=$gender;
+        return $this;
+    }
+
+    public function getClientTramasica(): ?ClientTramasica
+    {
+        return $this->clientTramasica;
+    }
+
+    public function setClientTramasica(?ClientTramasica $clientTramasica): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($clientTramasica === null && $this->clientTramasica !== null) {
+            $this->clientTramasica->setClient(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($clientTramasica !== null && $clientTramasica->getClient() !== $this) {
+            $clientTramasica->setClient($this);
+        }
+
+        $this->clientTramasica = $clientTramasica;
+
         return $this;
     }
 }

@@ -3,12 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Client;
-use App\Entity\Clientesnew;
-use App\Entity\Distribucionpedidosclientes;
-use App\Entity\Vtmclh;
-use App\Form\ClientType;
-use App\Form\ClientFilterType;
-use App\Repository\ClientRepository;
+use App\Entity\ClientTramasica;
+use App\Form\ClientTramasicaType;
+use App\Form\ClientTramasicaFilterType;
+use App\Repository\ClientTramasicaRepository;
 use App\Service\ClientHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -20,16 +18,16 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/clients")
+ * @Route("/clientes")
  */
-class ClientController extends AbstractController
+class ClientTramasicaController extends AbstractController
 {
     /**
-     * @Route("/index", name="app_client_index", methods={"GET"})
+     * @Route("/index", name="app_client_tramasica_index", methods={"GET"})
      */
-    public function index(ClientRepository $clientRepository,Request $request, PaginatorInterface $paginator): Response
+    public function index(ClientTramasicaRepository $clientRepository,Request $request, PaginatorInterface $paginator): Response
     {
-        $formFilter = $this->createForm(ClientFilterType::class, null,[
+        $formFilter = $this->createForm(ClientTramasicaFilterType::class, null,[
                 'method' => 'GET',
                 'attr' => [
                     'id' => 'idFilter',
@@ -42,62 +40,65 @@ class ClientController extends AbstractController
         $filter = $formFilter->isSubmitted() ? $formFilter->getData() : [];
 
         $clients = $paginator->paginate(
-                $clientRepository->getClientFilter($filter), /* query NOT result */
+                $clientRepository->getClientTramasicaFilter($filter), /* query NOT result */
                 $request->query->getInt('page', 1)/*page number*/,
                 20 /*limit per page*/
             );
 
-        return $this->render('client/index.html.twig', [
+        return $this->render('client_tramasica/index.html.twig', [
             'formFilter' => $formFilter->createView(),
             'clients' => $clients,
         ]);
     }
 
     /**
-     * @Route("/new", name="app_client_new", methods={"GET", "POST"})
+     * @Route("/new", name="app_client_tramasica_new", methods={"GET", "POST"})
      */
     public function new(Request $request, EntityManagerInterface $entityManager, Session $session): Response
     {
-        $client = new Client();
+        $tramasicaClient = new ClientTramasica();
         if($request->getMethod()=='GET'){
+            $client = new Client();
             $client->setEnabled(true);
             $client->setLegalPerson(false);
+            $tramasicaClient->setClient($client);
         }
-        $form = $this->createForm(ClientType::class, $client);
+        $form = $this->createForm(ClientTramasicaType::class, $tramasicaClient);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             try{
-                $entityManager->persist($client);
+                $entityManager->persist($tramasicaClient);
                 $entityManager->flush();
                 $session->getFlashBag()->add('notice', 'El cambio se realizó correctamente!');
-                return $this->redirectToRoute('app_client_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_client_tramasica_index', [], Response::HTTP_SEE_OTHER);
             } catch (Exception $ex) {
                 $session->getFlashBag()->add('error', 'Upss! - '.$ex->getMessage());
             }
         }
 
-        return $this->renderForm('client/new.html.twig', [
-            'client' => $client,
+        return $this->renderForm('client_tramasica/new.html.twig', [
+            'client' => $tramasicaClient,
             'form' => $form,
         ]);
     }
 
     /**
-     * @Route("/{id}", name="app_client_show", methods={"GET"})
+     * @Route("/{id}", name="app_client_tramasica_show", methods={"GET"})
      */
-    public function show(Client $client): Response
+    public function show(ClientTramasica $client): Response
     {
-        return $this->render('client/show.html.twig', [
+        return $this->render('client_tramasica/show.html.twig', [
             'client' => $client,
         ]);
     }
 
+
     /**
-     * @Route("/{id}/edit", name="app_client_edit", methods={"GET", "POST"})
+     * @Route("/{id}/edit", name="app_client_tramasica_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Client $client, EntityManagerInterface $entityManager,Session $session): Response
+    public function edit(Request $request, ClientTramasica $client, EntityManagerInterface $entityManager,Session $session): Response
     {
-        $form = $this->createForm(ClientType::class, $client);
+        $form = $this->createForm(ClientTramasicaType::class, $client);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -105,28 +106,28 @@ class ClientController extends AbstractController
                 $entityManager->flush();
                 $session->getFlashBag()->add('notice', 'El cambio se realizó correctamente!');
 
-                return $this->redirectToRoute('app_client_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_client_tramasica_index', [], Response::HTTP_SEE_OTHER);
             } catch (Exception $ex) {
                 $session->getFlashBag()->add('error', 'Upss! - '.$ex->getMessage());
             }
        }
 
-        return $this->renderForm('client/edit.html.twig', [
+        return $this->renderForm('client_tramasica/edit.html.twig', [
             'client' => $client,
             'form' => $form,
         ]);
     }
 
     /**
-     * @Route("/{id}", name="app_client_delete", methods={"POST"})
+     * @Route("/{id}", name="app_client_tramasica_delete", methods={"POST"})
      */
-    public function delete(Request $request, Client $client, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, ClientTramasica $client, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$client->getId(), $request->request->get('_token'))) {
             $entityManager->remove($client);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_client_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_client_tramasica_index', [], Response::HTTP_SEE_OTHER);
     }
 }

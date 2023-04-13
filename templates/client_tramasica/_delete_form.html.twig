@@ -1,0 +1,11 @@
+<form method="post" action="{{ path('app_client_tramasica_delete', {'id':
+                                    client.id}) }}"
+      onsubmit="return confirm('{{'controller.messages.message_if_confirm_delete'| trans({}, 'controller_messages') }}');" >
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ client.id) }}">
+    <button class="btn btn-danger"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="{{'controller.titles.delete_entity'| trans({}, 'controller_messages') }}">
+            <i class="fa fa-times"></i>
+    </button>
+</form>

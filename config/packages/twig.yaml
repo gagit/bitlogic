@@ -1,7 +1,9 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
     form_themes: ['twig/building_manager_form_layout.html.twig']
-
+    globals:
+        google_api_maps_id: '%env(resolve:GOOGLE_API_MAPS_ID)%'
+        google_api_maps_enable: '%env(resolve:GOOGLE_API_MAPS_ENABLE)%'
 when@test:
     twig:
         strict_variables: true

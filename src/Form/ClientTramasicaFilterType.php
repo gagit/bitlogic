@@ -4,40 +4,40 @@ namespace App\Form;
 
 use App\Entity\Client;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ClientType extends AbstractType
+class ClientTramasicaFilterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name',null,[
-                'label' => 'Nombre'
-            ])
+                        'required'=>false
+                    ]
+                )
             ->add('lastName',null,[
-                'label' => 'Apellido'
-            ])
+                        'required'=>false
+                    ]
+                )
             ->add('address',null,[
-                'label' => 'Domicilio'
-            ])
-            ->add('dateCreation',BirthdayType::class,[
-                'label' => 'Fecha Nac.'
-            ])
-            ->add('legalPerson',null,[
-                'label' => 'Persona Juridica'
-            ])
+                        'required'=>false
+                    ]
+                )
+            ->add('dateCreation',null,[
+                        'required'=>false
+                    ]
+                )
             ->add('enabled',null,[
-                'label' => 'Activo'
-            ])
+                        'required'=>false
+                    ]
+                )
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Client::class,
         ]);
     }
 }

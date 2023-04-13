@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Client;
 use App\Entity\IdentificationClient;
 use App\Form\IdentificationClientType;
 use App\Form\IdentificationClientFilterType;
@@ -66,11 +67,15 @@ class IdentificationClientController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="app_identification_client_new", methods={"GET", "POST"})
+     * @Route("/new/{id}", name="app_identification_client_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager, Session $session): Response
+    public function new(Request $request,$id, EntityManagerInterface $entityManager, Session $session): Response
     {
         $identificationClient = new IdentificationClient();
+        if($request->getMethod()=='GET'){
+            $client = $entityManager->getRepository(Client::class)->find($id);
+            $identificationClient->setClient($client);
+        }
         $form = $this->createForm(IdentificationClientType::class, $identificationClient);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -91,7 +96,7 @@ class IdentificationClientController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_identification_client_show", methods={"GET"})
+     * @Route("/show/{id}", name="app_identification_client_show", methods={"GET"})
      */
     public function show(IdentificationClient $identificationClient): Response
     {
