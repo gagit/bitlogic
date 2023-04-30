@@ -1,0 +1,35 @@
+<h5 class="card-header bg-secondary text-light" ><i class="fa fa-eye"></i>
+    Ver Categoria </h5>
+<hr/>
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ categorium.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ categorium.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ categorium.descripcion }}</td>
+            </tr>
+        </tbody>
+    </table>
+<hr/>
+<ul>
+    <li style="display: inline-flex">
+        <a href="{{ path('app_categoria_index') }}" class="btn btn-outline-info btn-back" data-toggle="tooltip" data-placement="top"
+           title="Volver"
+        ><i class="fa fa-arrow-left"></i></a>
+    </li>
+    <li style="display: inline-flex">
+        <a href="{{ path('app_categoria_edit', {'id': categorium.id}) }}" class="btn btn-outline-info btn-back" data-toggle="tooltip" data-placement="top"
+           title="Editar"
+        ><i class="fa fa-edit"></i></a>
+    </li>
+    <li style="display: inline-flex">
+        {{ include('categoria/_delete_form.html.twig') }}
+    </li>
+</ul>

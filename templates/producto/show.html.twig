@@ -1,0 +1,43 @@
+<h5 class="card-header bg-secondary text-light" ><i class="fa fa-eye"></i>
+    Ver Producto </h5>
+<hr/>
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ producto.id }}</td>
+            </tr>
+            <tr>
+                <th>CodBarra</th>
+                <td>{{ producto.codBarra }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ producto.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ producto.descripcion }}</td>
+            </tr>
+            <tr>
+                <th>Valor_umed</th>
+                <td>{{ producto.valorUmed }}</td>
+            </tr>
+        </tbody>
+    </table>
+<hr/>
+<ul>
+    <li style="display: inline-flex">
+        <a href="{{ path('app_producto_index') }}" class="btn btn-outline-info btn-back" data-toggle="tooltip" data-placement="top"
+           title="Volver"
+        ><i class="fa fa-arrow-left"></i></a>
+    </li>
+    <li style="display: inline-flex">
+        <a href="{{ path('app_producto_edit', {'id': producto.id}) }}" class="btn btn-outline-info btn-back" data-toggle="tooltip" data-placement="top"
+           title="Editar"
+        ><i class="fa fa-edit"></i></a>
+    </li>
+    <li style="display: inline-flex">
+        {{ include('producto/_delete_form.html.twig') }}
+    </li>
+</ul>

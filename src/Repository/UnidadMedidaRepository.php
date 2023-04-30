@@ -42,4 +42,29 @@ class UnidadMedidaRepository extends ServiceEntityRepository
     }
 
 
+   
+    public function getUnidadMedidaFilter($filter)
+    {
+        $qb = $this->createQueryBuilder('q')
+                ->select('q');
+                        
+if(array_key_exists('nombre',$filter) && $filter['nombre'] != null) {
+            $qb->andWhere($qb->expr()->eq('q.nombre', ':nombre'))
+                ->setParameter('nombre', $filter['nombre']);
+        }
+
+                    
+if(array_key_exists('nombre_corto',$filter) && $filter['nombre_corto'] != null) {
+            $qb->andWhere($qb->expr()->eq('q.nombre_corto', ':nombre_corto'))
+                ->setParameter('nombre_corto', $filter['nombre_corto']);
+        }
+
+                    
+if(array_key_exists('dimension',$filter) && $filter['dimension'] != null) {
+            $qb->andWhere($qb->expr()->eq('q.dimension', ':dimension'))
+                ->setParameter('dimension', $filter['dimension']);
+        }
+
+                    return  $qb;
+    }
 }

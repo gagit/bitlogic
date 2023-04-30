@@ -37,5 +37,22 @@ class MarcaRepository extends ServiceEntityRepository
         return  $qb;
     }
 
+    public function getMarcaFilter($filter)
+    {
+        $qb = $this->createQueryBuilder('q')
+                ->select('q');
 
+
+        if(array_key_exists('nombre',$filter) && $filter['nombre'] != null) {
+            $qb->andWhere($qb->expr()->eq('q.nombre', ':nombre'))
+                ->setParameter('nombre', $filter['nombre']);
+        }
+
+        if(array_key_exists('descripcion',$filter) && $filter['descripcion'] != null) {
+            $qb->andWhere($qb->expr()->eq('q.descripcion', ':descripcion'))
+                ->setParameter('descripcion', $filter['descripcion']);
+        }
+
+        return  $qb;
+    }
 }

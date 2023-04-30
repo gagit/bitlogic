@@ -1,0 +1,39 @@
+<h5 class="card-header bg-secondary text-light" ><i class="fa fa-eye"></i>
+    Ver UnidadMedida </h5>
+<hr/>
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ unidad_medida.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ unidad_medida.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Nombre_corto</th>
+                <td>{{ unidad_medida.nombreCorto }}</td>
+            </tr>
+            <tr>
+                <th>Dimension</th>
+                <td>{{ unidad_medida.dimension }}</td>
+            </tr>
+        </tbody>
+    </table>
+<hr/>
+<ul>
+    <li style="display: inline-flex">
+        <a href="{{ path('app_unidad_medida_index') }}" class="btn btn-outline-info btn-back" data-toggle="tooltip" data-placement="top"
+           title="Volver"
+        ><i class="fa fa-arrow-left"></i></a>
+    </li>
+    <li style="display: inline-flex">
+        <a href="{{ path('app_unidad_medida_edit', {'id': unidad_medida.id}) }}" class="btn btn-outline-info btn-back" data-toggle="tooltip" data-placement="top"
+           title="Editar"
+        ><i class="fa fa-edit"></i></a>
+    </li>
+    <li style="display: inline-flex">
+        {{ include('unidad_medida/_delete_form.html.twig') }}
+    </li>
+</ul>
