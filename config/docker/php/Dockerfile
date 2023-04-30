@@ -1,4 +1,4 @@
-FROM php:7.4.16-fpm as php74_pslq
+FROM php:8.1.0-fpm as php74_pslq
 
 #RUN apt update && apt install -y
 RUN apt-get update \
@@ -6,10 +6,10 @@ RUN apt-get update \
     && apt-get install -y libpng-dev  libzip-dev libjpeg-dev libfreetype6-dev libicu-dev libpq-dev libxml2-dev \
     && apt-get install -y libssl-dev gnupg gnupg2
 ################
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
-&& curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list \
-&& apt-get update
-RUN ACCEPT_EULA=Y apt-get install -y msodbcsql18 mssql-tools18 unixodbc-dev
+#RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+#&& curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+#&& apt-get update
+#RUN ACCEPT_EULA=Y apt-get install -y msodbcsql18 mssql-tools18 unixodbc-dev
 # optional: for bcp and sqlcmd
 #RUN ACCEPT_EULA=Y apt-get install -y
 #RUN 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bashrc
