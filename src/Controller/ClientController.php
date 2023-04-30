@@ -29,6 +29,7 @@ class ClientController extends AbstractController
      */
     public function index(ClientRepository $clientRepository,Request $request, PaginatorInterface $paginator): Response
     {
+        die();
         $formFilter = $this->createForm(ClientFilterType::class, null,[
                 'method' => 'GET',
                 'attr' => [

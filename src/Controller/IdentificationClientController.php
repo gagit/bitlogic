@@ -69,21 +69,24 @@ class IdentificationClientController extends AbstractController
     /**
      * @Route("/new/{id}", name="app_identification_client_new", methods={"GET", "POST"})
      */
-    public function new(Request $request,$id, EntityManagerInterface $entityManager, Session $session): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, Session $session): Response
     {
         $identificationClient = new IdentificationClient();
-        if($request->getMethod()=='GET'){
-            $client = $entityManager->getRepository(Client::class)->find($id);
-            $identificationClient->setClient($client);
-        }
+        $client = $entityManager->getRepository(Client::class)->find($request->get('id'));
+        $identificationClient->setClient($client);
+//        if($request->getMethod()=='GET'){
+//            $client = $entityManager->getRepository(Client::class)->find($request->get('id'));
+//            $identificationClient->setClient($client);
+//        }
         $form = $this->createForm(IdentificationClientType::class, $identificationClient);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             try{
                 $entityManager->persist($identificationClient);
                 $entityManager->flush();
-                $session->getFlashBag()->add('notice', 'El cambio se realizó correctamente!');
-                return $this->redirectToRoute('app_identification_client_index', [], Response::HTTP_SEE_OTHER);
+                $session->getFlashBag()->add('notice', 'El dato se agregó correctamente!');
+                return $this->redirectToRoute('app_client_tramasica_edit',
+                    ['id'=>$identificationClient->getClient()->getId()], Response::HTTP_SEE_OTHER);
             } catch (\Exception $ex) {
                 $session->getFlashBag()->add('error', 'Upss! - '.$ex->getMessage());
             }
@@ -117,7 +120,8 @@ class IdentificationClientController extends AbstractController
             try{
                 $entityManager->flush();
                 $session->getFlashBag()->add('notice', 'El cambio se realizó correctamente!');
-                return $this->redirectToRoute('app_client_edit', ['id' => $identificationClient->getClient()->getId()], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_client_tramasica_edit',
+                    ['id' => $identificationClient->getClient()->getClientTramasica()->getId()], Response::HTTP_SEE_OTHER);
             } catch (\Exception $ex) {
                 $session->getFlashBag()->add('error', 'Upss! - '.$ex->getMessage());
             }

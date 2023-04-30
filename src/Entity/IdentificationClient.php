@@ -66,7 +66,7 @@ class IdentificationClient implements IdentificationInterface
         return $this;
     }
 
-    public function getClient(): PersonInterface
+    public function getClient():? PersonInterface
     {
         return $this->client;
     }

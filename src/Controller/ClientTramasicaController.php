@@ -83,7 +83,7 @@ class ClientTramasicaController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_client_tramasica_show", methods={"GET"})
+     * @Route("/show/{id}", name="app_client_tramasica_show", methods={"GET"})
      */
     public function show(ClientTramasica $client): Response
     {

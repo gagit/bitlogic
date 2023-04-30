@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Client;
 use App\Entity\ContactClient;
 use App\Form\ContactClientType;
 use App\Form\ContactClientFilterType;
@@ -66,11 +67,13 @@ class ContactClientController extends AbstractController
         ]);
     }
     /**
-     * @Route("/new", name="app_contact_client_new", methods={"GET", "POST"})
+     * @Route("/new/{id}", name="app_contact_client_new", methods={"GET", "POST"})
      */
     public function new(Request $request, EntityManagerInterface $entityManager, Session $session): Response
     {
         $contactClient = new ContactClient();
+        $client = $entityManager->getRepository(Client::class)->find($request->get('id'));
+        $contactClient->setClient($client);
         $form = $this->createForm(ContactClientType::class, $contactClient);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -78,7 +81,8 @@ class ContactClientController extends AbstractController
                 $entityManager->persist($contactClient);
                 $entityManager->flush();
                 $session->getFlashBag()->add('notice', 'El cambio se realizó correctamente!');
-                return $this->redirectToRoute('app_contact_client_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_client_tramasica_edit',
+                    ['id' => $contactClient->getClient()->getClientTramasica()->getId()], Response::HTTP_SEE_OTHER);
             } catch (\Exception $ex) {
                 $session->getFlashBag()->add('error', 'Upss! - '.$ex->getMessage());
             }
@@ -113,7 +117,8 @@ class ContactClientController extends AbstractController
             try{
                 $entityManager->flush();
                 $session->getFlashBag()->add('notice', 'El cambio se realizó correctamente!');
-                return $this->redirectToRoute('app_client_edit', ['id' => $contactClient->getClient()->getId()], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_client_tramasica_edit',
+                    ['id' => $contactClient->getClient()->getClientTramasica()->getId()], Response::HTTP_SEE_OTHER);
             } catch (\Exception $ex) {
                 $session->getFlashBag()->add('error', 'Upss! - '.$ex->getMessage());
             }
