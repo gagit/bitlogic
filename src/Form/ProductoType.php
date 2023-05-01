@@ -29,10 +29,12 @@ class ProductoType extends AbstractType
                 'label' => 'Categorías',
                 'required' => false,
                 'mapped' => true,
-                'required' => true,
                 'expanded' => false,
                 'multiple' => true,
-                'class' => Categoria::class
+                'class' => Categoria::class,
+                'attr'=>[
+                    'class'=>'select2'
+                ]
             ])
             ->add('codBarra')
         ;

@@ -5,7 +5,7 @@
 {% block body %}
 
 <h5 class="card-header bg-secondary text-light" ><i class="fa fa-edit"></i>
-    Editar Producto index </h5>
+    Editar Producto</h5>
 <hr/>
     {{ include('producto/_form.html.twig') }}
 
@@ -21,4 +21,8 @@
     </li>
 </ul>
 
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('edit_product') }}
 {% endblock %}
