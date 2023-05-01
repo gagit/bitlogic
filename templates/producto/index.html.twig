@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block body %}
-<h5 class="card-header bg-secondary text-light" ><i class="fa fa-list"></i>Producto index </h5>
+<h5 class="card-header bg-secondary text-light" ><i class="fa fa-list"></i>Productos </h5>
 <hr/>
 {{ include('producto/_formFilter.html.twig') }}
 <hr/>
@@ -21,48 +21,59 @@
     {{ knp_pagination_render(productos) }}
 </div>
 <hr/>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>CodBarra</th>
-                <th>Nombre</th>
-                <th>Descripcion</th>
-                <th>Valor_umed</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for producto in productos %}
-            <tr>
-                <td>{{ producto.id }}</td>
-                <td>{{ producto.codBarra }}</td>
-                <td>{{ producto.nombre }}</td>
-                <td>{{ producto.descripcion }}</td>
-                <td>{{ producto.valorUmed }}</td>
-                <td>
-                    <ul>
-                        <li style="display: inline-flex" >
-                            <button type="button" class="btn btn-outline-dark btn-show"
-                                    data-toggle="modal" data-target="#showDetail"
-                                    data-source="{{ path('app_producto_show', {'id': producto.id}) }}">
-                                <i class="fa fa-eye"></i>
-                            </button>
-                        </li>
-                        <li style="display: inline-flex" >
-                            <a class="btn btn-outline-dark" href="{{ path('app_producto_edit', {'id': producto.id}) }}">
-                                <i class="fa fa-edit"></i> </a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+
+<div class="container" id="#listadoSinRendir" >
+    {% for producto in productos %}
+        <div class="row ">
+            <div class="col-12 col-sm-12">
+                <ul class="list-group-item-dark">
+                    <li class="list-group-item list-group-item-action" >
+                        <strong>Nombre: </strong> {{ producto.nombre }}
+                    </li>
+                    <li class="list-group-item" >
+                        <strong>Descripción: </strong> {{ producto.descripcion }}
+                    </li>
+                    <li class="list-group-item" >
+                        <strong>Categorias: </strong>
+                        <ul>
+                            {% for categoria in producto.getCategoriasProducto %}
+                                <li class="list-group-item" >
+                                    {{ categoria.nombre }}
+                                </li>
+                            {% else %}
+                                <div class="row">
+                                    <div class="col-12">
+                                        {{'controller.messages.message_no_records_found'| trans({}, 'controller_messages') }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="list-group-item" >
+                        <ul>
+                            <li style="display: inline-flex" >
+                                <button type="button" class="btn btn-outline-dark btn-show"
+                                        data-toggle="modal" data-target="#showDetail"
+                                        data-source="{{ path('app_producto_show', {'id': producto.id}) }}">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+                            </li>
+                            <li style="display: inline-flex" >
+                                <a class="btn btn-outline-dark" href="{{ path('app_producto_edit', {'id': producto.id}) }}">
+                                    <i class="fa fa-edit"></i> </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-12">
+                {{'controller.messages.message_no_records_found'| trans({}, 'controller_messages') }}
+            </div>
+        </div>
+    {% endfor %}
     <hr/>
     <div class="navigation">
         {{ knp_pagination_render(productos) }}

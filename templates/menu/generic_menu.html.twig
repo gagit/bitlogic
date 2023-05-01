@@ -8,6 +8,16 @@
             <a class="dropdown-item" href="{{ path('app_identification_type_index') }}">Tipos de Identificación</a>
         </div>
     </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="{{ path('app_client_tramasica_index') }}" id="configuracion" role="button"
+           data-toggle="dropdown" aria-expanded="false"><i class="fa fa-product-hunt"></i> Productos</a>
+        <div class="dropdown-menu " aria-labelledby="">
+            <a class="dropdown-item" href="{{ path('app_producto_index') }}">Productos</a>
+            <a class="dropdown-item" href="{{ path('app_categoria_index') }}">Categoría</a>
+            <a class="dropdown-item" href="{{ path('app_marca_index') }}">Marcas</a>
+            <a class="dropdown-item" href="{{ path('app_unidad_medida_index') }}">Unidad de Medida</a>
+        </div>
+    </li>
     <li class="nav-item ">
         <a class="nav-link " href="{{ path('app_qr_new') }}" id="qr" role="button"
             aria-expanded="false"><i class="fa fa-qrcode"></i> QR</a>
