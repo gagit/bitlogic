@@ -24,13 +24,13 @@ services:
       - 9003
     environment:
       PHP_IDE_CONFIG: bitlogic-php
-      PHP_XDEBUG_ENABLED: 1
+      PHP_XDEBUG_ENABLED: 0
 #      PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
 #      PHP_XDEBUG_ENABLED: ${PHP_XDEBUG_ENABLED}
       APP_DEV: dev
     volumes:
       - ./:/var/www/html/bitlogic
-      - ./config/docker/php/xdebug-linux.ini:/usr/local/etc/php/conf.d/xdebug.ini
+#      - ./config/docker/php/xdebug-linux.ini:/usr/local/etc/php/conf.d/xdebug.ini
 
 #version: '3'
 #
