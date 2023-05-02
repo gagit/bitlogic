@@ -30,15 +30,15 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="">
                         <ul class="list-group-item">
-                            <li class="list-group-item list-group-item-action" >
-                                {{ app.user.nombre }}, {{ app.user.apellido }}
-                            </li>
+{#                            <li class="list-group-item list-group-item-action" >#}
+{#                                {{ app.user.nombre }}, {{ app.user.apellido }}#}
+{#                            </li>#}
                             <li class="list-group-item list-group-item-action" >
                                 <i class="fa fa-at"></i> {{ app.user.email }}
                             </li>
-                            <li class="list-group-item list-group-item-action" >
-                                <i class="fa fa-mobile"></i> {{ app.user.cellphone }}
-                            </li>
+{#                            <li class="list-group-item list-group-item-action" >#}
+{#                                <i class="fa fa-mobile"></i> {{ app.user.cellphone }}#}
+{#                            </li>#}
                         </ul>
                         <a class="dropdown-item" href="{{ path('app_logout')}}"
                            title="{{'controller.titles.logout'| trans({}, 'controller_messages') }}">
@@ -47,6 +47,16 @@
                     </div>
                 </li>
             </ul>
+        {% else %}
+                <ul class="navbar-nav  navbar-right ml-auto  ">
+                    <li class="nav-item ">
+                        <a class="nav-link " href="{{ path('app_login')}}"
+                           id="userConfiguration"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-inbox"></i> Ingresar
+                        </a>
+                    </li>
+                </ul>
         {% endif %}
         </div>
         {% if app.user %}

@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <h1>Registrar usuario</h1>
+
+    {{ form_start(registrationForm) }}
+        {{ form_errors(registrationForm) }}
+        <div class="row">
+            <div class="form-group col-md">
+                {{ form_row(registrationForm.nombre) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md">
+                {{ form_row(registrationForm.apellido) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md">
+                {{ form_row(registrationForm.email) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md">
+                {{ form_row(registrationForm.sucursalUsuario) }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md">
+                {{ form_row(registrationForm.agreeTerms) }}
+            </div>
+            <div class="form-group col-md">
+                <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#showTyCModal"
+                        data-source="{{ path('terminos_y_condiciones_show_modal',{'id': 'bcc86c3d-4f9d-43cd-b42c-3ff0364f915b'}) }}"
+                ><i class="fa fa-eye"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group  col-md">
+                <button type="submit" class="btn btn-outline-info">Registrarse</button>
+            </div>
+        </div>
+
+    {{ form_end(registrationForm) }}
+
+
+    <div class="modal" id="showTyCModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-scrollable modal-sm modal-lg modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Términos y Condiciones</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">{{'controller.titles.close_window'| trans({}, 'controller_messages') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(function () {
+            $('#showTyCModal').on('shown.bs.modal', function (e) {
+                var button = $(e.relatedTarget);
+                var modal = $(this);
+                modal.find('.modal-body').load(button.data("source"));
+            });
+        });
+    </script>
+
+{% endblock %}

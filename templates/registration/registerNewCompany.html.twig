@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Empresa{% endblock %}
+
+{% block body %}
+    <h5 class="card-header bg-secondary text-light" ><i class="fa fa-edit"></i>
+        Empresa</h5>
+
+    <hr/>
+
+
+    {{ form_start(form) }}
+
+    <div class="containerc container-fluid">
+        <div class="row">
+            <div class="col-md">
+                {{ form_label(form.nombreEmpresa) }}
+                {{ form_widget(form.nombreEmpresa) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md">
+                {{ form_label(form.domicilioLegal) }}
+                {{ form_widget(form.domicilioLegal) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md">
+                {{ form_label(form.cuit) }}
+                {{ form_widget(form.cuit) }}
+            </div>
+            <div class="col-md">
+                {{ form_label(form.fechaInicioActividad) }}
+                {{ form_widget(form.fechaInicioActividad) }}
+            </div>
+        </div>
+
+{#        <hr/>#}
+{#        <div class="row ">#}
+{#            <div class="col col-md">#}
+{#                {{ form_widget(form.tieneSucursales) }}#}
+{#            </div>#}
+{#        </div>#}
+        <hr/>
+        <div class="row">
+            <div class="col col-md">
+                <button class="btn btn-outline-info">Continuar Registro <i class="fa fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+
+    {{ form_end(form) }}
+
+    <br/>
+    <hr/>
+    <ul>
+        <li style="display: inline-flex">
+            <a class="btn btn-outline-info"  href="{{ path('home') }}"><i class="fa fa-arrow-left"></i></a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,14 @@
+<h5 class="card-header bg-secondary text-light" >
+    <i class="fa fa-key"></i>
+    Hola!
+</h5>
+<br/>
+
+<p>Este mensaje se ha enviado para confirmar tu cuenta de correo electrónica y para resetear tu password.
+    Para completar el proceso has click en el siguiente link</p>
+
+<a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
+
+<p>Este link <strong>expira en 1 hora</strong> {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+
+<p>Saludos!</p>
