@@ -9,30 +9,42 @@
             </tr>
             <tr>
                 <th>Nombre</th>
-                <td>{{ client.name }}</td>
+                <td>{{ client.client.name }}</td>
             </tr>
             <tr>
                 <th>Apellido</th>
-                <td>{{ client.lastName }}</td>
+                <td>{{ client.client.lastName }}</td>
             </tr>
             <tr>
                 <th>Domicilio</th>
-                <td>{{ client.address }}</td>
+                <td>{{ client.client.address }}</td>
             </tr>
             <tr>
                 <th>Fecha Nac.</th>
-                <td>{{ client.dateCreation ? client.dateCreation|date('d/m/Y') : '' }}</td>
+                <td>{{ client.client.dateCreation ? client.client.dateCreation|date('d/m/Y') : '' }}</td>
             </tr>
             <tr>
                 <th>Enabled</th>
-                <td>{{ client.enabled ? 'Yes' : 'No' }}</td>
+                <td>{{ client.client.enabled ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Lugar de Nacimiento</th>
+                <td>{{ client.addressOfBird }}</td>
+            </tr>
+            <tr>
+                <th>Lat</th>
+                <td>{{ client.latAddressOfBird }}</td>
+            </tr>
+            <tr>
+                <th>Long</th>
+                <td>{{ client.lngAddressOfBird }}</td>
             </tr>
         </tbody>
     </table>
 <hr/>
 <div class="container">
     <p><strong>Identificaciones</strong></p>
-    {% for identificacion in client.identifications %}
+    {% for identificacion in client.client.identifications %}
         <div class="row ">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <ul class="list-group-item-dark">
@@ -47,7 +59,7 @@
 <hr/>
 <div class="container">
     <p><strong>Contactos</strong></p>
-    {% for contact in client.contacts %}
+    {% for contact in client.client.contacts %}
         <div class="row ">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <ul class="list-group-item-dark">

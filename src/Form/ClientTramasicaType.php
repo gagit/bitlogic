@@ -19,7 +19,7 @@ class ClientTramasicaType extends AbstractType
     {
         $builder
             ->add('client',ClientType::class,[
-                'label' => '-'
+                'label' => 'Datos Personales'
             ])
 
             ->add('timeOfBird',null,[
@@ -27,6 +27,12 @@ class ClientTramasicaType extends AbstractType
             ])
             ->add('addressOfBird',null,[
                 'label' => 'Lugar de Nacimiento'
+            ])
+            ->add('latAddressOfBird',null,[
+                'label' => 'Latitud'
+            ])
+            ->add('lngAddressOfBird',null,[
+                'label' => 'Longitud'
             ])
         ;
     }

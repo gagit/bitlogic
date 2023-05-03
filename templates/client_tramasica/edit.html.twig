@@ -29,6 +29,88 @@
             <div class="tab-pane fade show active " id="datosPersonales-tab" role="tabpanel" aria-labelledby="datosPersonales-link">
                 <br/>
                 {{ include('client/_form.html.twig') }}
+
+                <hr/>
+                <div style="height:100%; width:100%;">
+                    {#        <div id="infoMap" style="clear:both; height:auto;">#}
+                    {#            Haga Click en el boton para permitir acceder a su ubicación. Luego en el seleccionar el lugar que quiera georeferenciar.#}
+                    {#        </div>#}
+                    <div id="map" style="clear:both; height:200px;"></div>
+                    <hr>
+                    <input id="pac-input" class="controls form-control" name="address" value="las heras" type="text" placeholder="Enter a location">
+                    <br>
+                    <div class="row">
+                        <div class="form-group col-md-6"><input type="hidden" name="lat" id="lat" class="form-control" required placeholder="Latitude" value=""></div>
+                        <div class="form-group col-md-6"><input type="hidden" name="lng" id="lng" class="form-control" required placeholder="Longitude" value=""></div>
+                    </div>
+                    <div id="infowindow-content">
+                        <span id="place-name"  class="title"></span>
+                        <span id="place-id"></span><br>
+                        <span id="place-address"></span>
+                    </div>
+                </div>
+                <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+                <script src="https://maps.googleapis.com/maps/api/js?key={{google_api_maps_id}}&callback=initMap&libraries=places&v=weekly" async></script>
+                <script>
+                    function initMap() {
+                        var map = new google.maps.Map(
+                            document.getElementById('map'),
+                            {center: { lat: -32.888355, lng: -68.838844 }, zoom: 13});
+
+
+                        var input = document.getElementById('pac-input');
+                        // vvar input = document.getElementById('addressOfBird');
+                        var autocomplete = new google.maps.places.Autocomplete(input);
+                        autocomplete.bindTo('bounds', map);
+                        // Specify just the place data fields that you need.
+                        autocomplete.setFields(['place_id', 'geometry', 'name', 'formatted_address']);
+                        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+                        var infowindow = new google.maps.InfoWindow();
+                        var infowindowContent = document.getElementById('infowindow-content');
+                        infowindow.setContent(infowindowContent);
+                        var geocoder = new google.maps.Geocoder;
+                        var marker = new google.maps.Marker({map: map,
+                        });
+                        marker.addListener('click', function() {
+                            infowindow.open(map, marker);
+                        });
+
+                        autocomplete.addListener('place_changed', function() {
+                            infowindow.close();
+                            var place = autocomplete.getPlace();
+
+                            if (!place.place_id) {
+                                return;
+                            }
+                            geocoder.geocode({'placeId': place.place_id}, function(results, status) {
+                                if (status !== 'OK') {
+                                    window.alert('Geocoder failed due to: ' + status);
+                                    return;
+                                }
+
+                                map.setZoom(11);
+                                map.setCenter(results[0].geometry.location);
+
+                                // Set the position of the marker using the place ID and location.
+                                marker.setPlace(
+                                    {placeId: place.place_id, location: results[0].geometry.location});
+
+                                marker.setVisible(true);
+
+                                infowindowContent.children['place-name'].textContent = place.name;
+                                infowindowContent.children['place-id'].textContent = place.place_id;
+                                infowindowContent.children['place-address'].textContent = results[0].formatted_address;
+
+                                document.getElementById('lat').value = results[0].geometry.location.lat();
+                                document.getElementById('lng').value = results[0].geometry.location.lng();
+                                document.getElementById('client_tramasica_addressOfBird').value = results[0].formatted_address;
+                                document.getElementById('client_tramasica_latAddressOfBird').value = results[0].geometry.location.lat();
+                                document.getElementById('client_tramasica_lngAddressOfBird').value = results[0].geometry.location.lng();
+                                infowindow.open(map, marker);
+                            });
+                        });
+                    }
+                </script>
             </div>
             <div class="tab-pane fade" id="identifications-tab" role="tabpanel" aria-labelledby="identifications-link">
 
