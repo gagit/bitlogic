@@ -34,6 +34,8 @@ class GoHomeUser
             $routeToHome=$this->urlGenerator->generate('app_proyecto_habitacional_index');
         } elseif ($this->user->isGranted('ROLE_PROPIETARIO')) {
             $routeToHome=$this->urlGenerator->generate('app_unidad_habitacional_index');
+        }else {
+            $routeToHome=$this->urlGenerator->generate('app_qr_new');
         }
         return $routeToHome;
     }
