@@ -25,6 +25,10 @@ class ProcessCsvFile
                 //$instruccionesEcho = 'echo "Ejecuntado comando ';
                 //$instrucciones= 'node dist/index.js --cmd damexporter --type noncatalogued --path $DIR --front 2 --split 5000 --chunk 1000 --checksum --asset_id ';
                 //$instrucciones= ' in(';
+                //--------Resultado q tengo que obtener
+                //$instrucciones= 'wget -O /proctmp/idam/dammeta2.xml "http://licencias.bajalibros.com/bulkservices/endpoint/user:Ymx3ZWIx/password:ZGJsYWNjOTAyMTBm/name:metadata/token:762d99d322a400e2b29fe179103e97ea/catalogitem_id:1928200/noxml:1"';
+                //$instrucciones= 'wget -O /proctmp/idam/dammeta2.xml "http://licencias.bajalibros.com/bulkservices/endpoint/user:Ymx3ZWIx/password:ZGJsYWNjOTAyMTBm/name:metadata/token:762d99d322a400e2b29fe179103e97ea/catalogitem_id:1928200/noxml:1"';
+                //--------
                 $instrucciones= '';
                 $cantInstrucciones = 0;
                 $assets_ids='';
@@ -52,6 +56,30 @@ class ProcessCsvFile
         fclose($handleIn);
         fclose($handleOut);
 
+    }
+
+    /**
+     * Hecho especificamente para generar las intrucciones de acutalización de precios para bajalibros
+     *
+     * @param string $filenameIn
+     * @param int $colToUse
+     * @return void
+     */
+    public function convertCsvFilesToTextUpdatePrice(string $filenameIn, int $colToUse = 0){
+
+        $path = $this->container->getParameter('tmp_directory');
+        echo 'cd /var/www/html/bajalibrosws'. chr(13) . chr(10);
+        //------
+        if (($handleIn = fopen("$path/csv/$filenameIn", "r")) !== FALSE) {
+                while (($data = fgetcsv($handleIn, 0, ","))  !== FALSE) {
+                    $catalogItem =$data[$colToUse];
+                    $instruccionUpdatePrice= 'wget -O /proctmp/idam/dammeta'.$catalogItem.'.xml "http://licencias.bajalibros.com/bulkservices/endpoint/user:Ymx3ZWIx/password:ZGJsYWNjOTAyMTBm/name:metadata/token:762d99d322a400e2b29fe179103e97ea/catalogitem_id:'.$catalogItem.'/noxml:1"';
+                    echo '########################## '. chr(13) . chr(10);
+                    echo  trim($instruccionUpdatePrice). chr(13) . chr(10);
+                }
+        }
+        fclose($handleIn);
+        echo '/var/local/php/bin/php /var/www/html/bajalibrosws/ingesta_dam/ingesta_dam.php /proctmp/idam 12 3 --nodownload --allow-zero-price'. chr(13) . chr(10);
     }
 
     public function mergeCsvFilesToCsv(string $directoryIn, string $filenameOut, array $cells,string $textToComplete){

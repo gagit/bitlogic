@@ -18,7 +18,13 @@ require('@fortawesome/fontawesome-free/css/all.min.css');
 require('@fortawesome/fontawesome-free/js/all.js');
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
-
+// import Vue from 'vue';
+// import App from './vueComponents/App.vue'
+//
+// new Vue({
+//     el:"#app",
+//     components: {App}
+// })
 $(document).ready(
     function ()
     {

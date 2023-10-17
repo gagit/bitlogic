@@ -20,6 +20,9 @@
         {% block notifications %}
             {% include 'notificationsSection.html.twig' %}
         {% endblock %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
         <section id="contenido">
             <div class="container">
         {% block body %}{% endblock %}
@@ -34,8 +37,6 @@
             </div>
         </footer>
     {% endblock %}
-    {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
-    {% endblock %}
+
     </body>
 </html>

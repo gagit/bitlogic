@@ -1,0 +1,16 @@
+# api/config/api_platform/resources.yaml
+resources:
+  App\Resources\FileUpload:
+    description: 'Uploads Files'
+    attributes:
+      normalization_context:
+        groups: [ 'uploadfiles:read' ]
+      denormalization_context:
+        groups: [ 'uploadfiles:write' ]
+    collectionOperations:
+      post:
+        path: /file_upload
+        method: 'POST'
+        controller: CsvController::class
+#        read: false
+        deserialize: false

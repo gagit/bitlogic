@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Service;
 
 use App\Helpers\DamHelper;
 use Illuminate\Support\Facades\Storage;

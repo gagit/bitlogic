@@ -3,15 +3,19 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use App\Repository\MarcaRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass=MarcaRepository::class)
  */
 class Marca {
     /**
+     * @ApiProperty(identifier=true)
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
@@ -19,13 +23,15 @@ class Marca {
      */
     protected $id;
 
-        /**
+    /**
+    * @ApiProperty()
     * @ORM\Column(type="string", length=100, nullable=false)
     */
     protected $nombre;
     
     
     /**
+    * @ApiProperty()
     * @ORM\Column(type="string", length=200, nullable=true)
     */
     protected $descripcion;

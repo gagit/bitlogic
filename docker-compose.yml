@@ -16,6 +16,7 @@ services:
     env_file:
       - ./.env_docker
     container_name: php-bitlogic
+    user: "${UID}:${GID}"
     build:
       context: ./config/docker/php/
       dockerfile: Dockerfile
