@@ -36,6 +36,31 @@ class ClientTramasicaController extends AbstractController
                 ]
             ]
         );
+//        $fields = array
+//        (
+//            "Input.txt" => "Randy",
+//            "Code.py" => "Stan",
+//            "Output.txt" => "Randy"
+//        );
+//        $nombresDeArchivo = [];
+//        foreach($fields as $key => $field){
+//            $nombresDeArchivo[$field][] = $key;
+////            if(array_key_exists($field,$nombresDeArchivo)){
+////                $nombresDeArchivo[$field][] = $nombresDeArchivo;
+////            }else{
+////                $nombresDeArchivo[$field][] = $nombresDeArchivo;
+////            }
+////                return [];
+//        }
+//
+//        var_dump($nombresDeArchivo);
+
+
+
+//        $valor = $request->get('valor');
+//        die($valor);
+
+
         $formFilter->handleRequest($request);
         $filter = $formFilter->isSubmitted() ? $formFilter->getData() : [];
 

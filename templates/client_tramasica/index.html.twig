@@ -12,6 +12,34 @@
 
 {% block body %}
 <h5 class="card-header bg-secondary text-light" ><i class="fa fa-list"></i> Listado Clientes</h5>
+    <script>
+
+
+        // Example case
+        document.body.innerHTML = `
+<div class="image">
+  <img src="https://www.vidoomy.com/dev_test_full_en/img/1_img.jpg" alt="First">
+  <button class="remove" onclick="setup(0)">X</button>
+</div>
+<div class="image">
+  <img src="https://www.vidoomy.com/dev_test_full_en/img/2_img.jpg" alt="Second">
+  <button class="remove" onclick="setup(1)">X</button>
+</div>`;
+        function setup(value) {
+            alert(document.getElementsByClassName("remove")[value])
+            document.getElementsByClassName("remove")[value].remove();
+            // console.log(document.getElementsByClassName("remove"));
+            // console.log(document.getElementsByClassName("remove")[value]);
+            // Write your code here.
+        }
+       // setup();
+
+        document.getElementsByClassName("remove")[0].click();
+        console.log(document.body.innerHTML);
+    </script>
+
+
+
 <hr/>
 {{ include('client_tramasica/_formFilter.html.twig') }}
 <hr/>
